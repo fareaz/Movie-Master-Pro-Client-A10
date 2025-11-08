@@ -1,9 +1,14 @@
  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
  @import "tailwindcss";
  @plugin "daisyui" {
-  themes: dark --default, dark --prefersdark;
-  themes: dark --default;
- }
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
  *{
   font-family: "Roboto", sans-serif;
  }
+ .navbar .active {
+  color: crimson;
+  font-weight: bold;
+}
