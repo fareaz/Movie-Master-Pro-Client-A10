@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCard from '../Components/MovieCard';
+import Loading from './Loading';
+import axios from 'axios';
 
 const AllMovies = () => {
-    return (
-        <div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
-      <MovieCard  />
+     const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  useEffect(() => {
+  axios.get("http://localhost:3000/movies")
+    .then((data) =>setMovies(data.data))
+    .catch(e => setError(e.message))
+    .finally(() => setLoading(false))
+   }, []);
+  if (loading) return <Loading></Loading>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
+  return (
+      <div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {movies.map((m) => (
+        <MovieCard key={m.id} movie={m} />
+      ))}
      
     </div>
         </div>
