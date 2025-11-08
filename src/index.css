@@ -8,6 +8,13 @@
  *{
   font-family: "Roboto", sans-serif;
  }
+ .glass-card {
+  
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(216, 23, 23, 0.3);
+  overflow: hidden;
+}
  .navbar .active {
   color: crimson;
   font-weight: bold;

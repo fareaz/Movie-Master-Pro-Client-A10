@@ -91,13 +91,13 @@ const Login = () => {
   };
 
   return (
-   <div className="hero bg-transparent min-h-screen">
+   <div className="hero  min-h-screen ">
   <div className="hero-content flex-col">
     <div className="text-center">
       <h3 className="text-4xl font-bold text-red-600">Login Now</h3>
     </div>
 
-    <div className=" w-full max-w-sm shrink-0 shadow-xl rounded-xl border border-red-400 bg-transparent backdrop-blur-xl">
+    <div className=" glass-card w-full max-w-sm shrink-0 shadow-xl rounded-xl backdrop-blur-xl">
       <div className="card-body">
         <form onSubmit={handleLogIn}>
           <fieldset className="fieldset ">

@@ -57,7 +57,7 @@ const Register = () => {
          
         </div>
 
-        <div className="card rounded-xl border border-red-400 w-full max-w-sm shrink-0 shadow-xl">
+        <div className="card rounded-xl glass-card w-full max-w-sm shrink-0 shadow-xl">
           <div className="card-body">
             <form onSubmit={handleRegister}>
               <fieldset className="fieldset">
