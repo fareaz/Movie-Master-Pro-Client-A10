@@ -23,7 +23,10 @@ const MovieCard = ({ movie }) => {
         <img
           src={posterUrl}
           alt={title}
-          className="h-full w-full object-cover transform transition duration-300 group-hover:scale-[1.03]"
+          className=" w-full object-cover transform transition duration-300 group-hover:scale-[1.03] h-60     
+            sm:h-72        
+            md:h-80        
+            lg:h-96  "
           loading="lazy"
         />
       </div>

@@ -25,7 +25,8 @@ const AddMovie = () => {
       posterUrl: e.target.posterUrl.value,
       language: e.target.language.value,
       country: e.target.country.value,
-      addedBy: user.email
+      addedBy: user.email,
+      created_at: new Date(),
     }
      axios
       .post("http://localhost:3000/movies", formData , {
