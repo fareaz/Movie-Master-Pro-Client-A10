@@ -2,10 +2,9 @@ import React, { use, useEffect, useState } from 'react';
 import { GoHomeFill } from 'react-icons/go';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
-import { LuRotate3D } from 'react-icons/lu';
-import { FaUser } from 'react-icons/fa';
 import { IoLogIn, IoLogOut } from 'react-icons/io5';
-import { FaGear } from 'react-icons/fa6';
+import { MdMovieEdit } from "react-icons/md";
+import { RiMovieAiFill } from 'react-icons/ri';
 
 const NavBar = () => {
        const { user, signOutUser } = use(AuthContext);
@@ -55,9 +54,16 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink to={"/all-movies"}>
+              <RiMovieAiFill/>
                 All Movies
               </NavLink>
             </li>
+            <li>
+            <NavLink to={"/add-movie"}>
+            <MdMovieEdit />
+              Add Movie
+            </NavLink>
+          </li>
           </ul>
         </div>
         <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
@@ -74,11 +80,13 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink to={"/all-movies"}>
+            <RiMovieAiFill/>
                All Movies
             </NavLink>
           </li>
           <li>
             <NavLink to={"/add-movie"}>
+            <MdMovieEdit />
               Add Movie
             </NavLink>
           </li>
@@ -105,7 +113,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Dropdown content */}
+      
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 max-w-52 p-2 shadow z-50"
@@ -130,14 +138,14 @@ const NavBar = () => {
       
         <li className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
   <div className="flex items-center gap-2 text-sm font-medium">
-    <span className="text-gray-600 dark:text-gray-400">Dark</span>
+    <span className="text-gray-600 dark:text-gray-400">Light</span>
     <input
       onChange={(e) => handleTheme(e.target.checked)}
       type="checkbox"
       defaultChecked={localStorage.getItem("theme") === "dark"}
       className="toggle toggle-sm bg-gray-300 border-gray-400"
     />
-    <span className="text-gray-600 dark:text-gray-400">Light</span>
+    <span className="text-gray-600 dark:text-gray-400">Dark</span>
   </div>
 </li>
         <li>

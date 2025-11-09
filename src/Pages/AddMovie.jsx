@@ -39,7 +39,7 @@ const AddMovie = () => {
       });
   }
     return (
-         <div className="max-w-4xl mx-auto p-8 bg-transparent backdrop-blur-md glass-card rounded-2xl shadow-xl">
+         <div className="max-w-11/12 mx-auto  p-8 bg-transparent backdrop-blur-md glass-card rounded-2xl shadow-xl">
       <h2 className="text-3xl font-bold mb-6 text-center">
          Add New <span className='text-red-500'>Movie</span>
       </h2>
@@ -51,8 +51,9 @@ const AddMovie = () => {
           <input
             type="text"
             name="title"
+            required
             placeholder="Title"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
@@ -63,7 +64,8 @@ const AddMovie = () => {
             type="text"
             name="genre"
             placeholder="Genre"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
@@ -74,52 +76,57 @@ const AddMovie = () => {
             type="number"
             name="releaseYear"
             placeholder="Release Year"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Director */}
+      
         <div className="flex items-center gap-3">
           <FaUserAlt className="text-red-500 text-xl" />
           <input
             type="text"
             name="director"
             placeholder="Director"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Cast */}
+      
         <div className="flex items-center gap-3">
           <FaUserAlt className="text-red-500 text-xl" />
           <input
             type="text"
             name="cast"
             placeholder="Cast"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Rating */}
+    
         <div className="flex items-center gap-3">
           <FaStar className="text-red-500 text-xl" />
           <input
             type="number"
             step="0.1"
             name="rating"
+            required
             placeholder="Rating (0–10)"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Duration */}
+    
         <div className="flex items-center gap-3">
           <FaClock className="text-red-500 text-xl" />
           <input
             type="number"
             name="duration"
             placeholder="Duration (minutes)"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
@@ -129,8 +136,9 @@ const AddMovie = () => {
           <input
             type="url"
             name="posterUrl"
+            required
             placeholder="Poster URL"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
@@ -140,23 +148,25 @@ const AddMovie = () => {
           <input
             type="text"
             name="language"
+            required
             placeholder="Language"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Country */}
+   
         <div className="flex items-center gap-3">
           <FaFlag className="text-red-500 text-xl" />
           <input
             type="text"
             name="country"
             placeholder="Country"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
+            required
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
           />
         </div>
 
-        {/* Added By */}
+      
         <div className="flex items-center gap-3">
           <FaEnvelope className="text-red-500 text-xl" />
           <input
@@ -164,17 +174,17 @@ const AddMovie = () => {
             name="addedBy"
             defaultValue={user?.email}
             readOnly
-            className="input text-gray-400 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none placeholder-gray-400 flex-1 cursor-not-allowed"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none placeholder-gray-400 flex-1 cursor-not-allowed"
           />
         </div>
 
-        {/* Plot Summary - full width */}
         <div className="flex items-start gap-3 md:col-span-2">
           <FaAlignLeft className="text-red-500 text-xl mt-2" />
           <textarea
             name="plotSummary"
-            placeholder="Plot Summary"
-            className="input text-gray-200 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1 min-h-[100px]"
+            rows="4"
+            placeholder="Movie Summary"
+            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1 min-h-[100px]"
           />
         </div>
 
