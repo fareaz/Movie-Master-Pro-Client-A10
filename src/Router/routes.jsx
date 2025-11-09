@@ -9,6 +9,7 @@ import AddMovie from "../Pages/AddMovie";
 import Error from "../Pages/Error";
 import MovieDetails from "../Pages/MovieDetails";
 import PrivateRoute from "../Private/PrivateRoute";
+import UpdataPage from "../Pages/UpdataPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
   {
         path: 'movie/:id',
         element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,  
+      },
+  {
+        path: '/edit-movie/:id',
+        element: <PrivateRoute><UpdataPage></UpdataPage></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:3000/movieDetails/${params.id}`)
       },
   {
      path: "/login",

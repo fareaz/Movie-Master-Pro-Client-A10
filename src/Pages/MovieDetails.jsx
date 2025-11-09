@@ -76,16 +76,16 @@ const MovieDetails = () => {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl border border-red-500">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-    {/* 🖼️ Poster Left */}
+
     <div>
       <img
         src={movie.posterUrl}
         alt={movie.title}
-        className="w-full rounded-xl border-4 border-red-500 shadow-md"
+        className="w-full rounded-xl border-4  shadow-md"
       />
     </div>
 
-    {/* 🎬 Info Right */}
+ 
     <div>
       <h1 className="text-3xl font-bold text-red-600">{movie.title}</h1>
       <p className="text-gray-600 dark:text-gray-300 mb-3">
@@ -120,11 +120,10 @@ const MovieDetails = () => {
         <strong>Added By:</strong> {movie.addedBy}
       </p>
 
-      {/* ✏️ Edit / Delete Buttons for Owner */}
       {isOwner && (
         <div className="flex gap-4 mt-6">
           <Link
-            to={`/edit/${movie._id}`}
+            to={`/edit-movie/${movie._id}`}
             className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all"
           >
             <FaEdit /> Edit

@@ -4,7 +4,7 @@ import Loading from './Loading';
 import axios from 'axios';
 
 const AllMovies = () => {
-     const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   useEffect(() => {
