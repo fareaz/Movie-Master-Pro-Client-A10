@@ -6,7 +6,7 @@ import { Link } from  'react-router';
 const Footer = () => {
   return (
     <footer className="  py-8  ">
-      <div className="max-w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className=" mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
           <h3 className="text-lg font-semibold text-red-500">Quick Links</h3>
           <ul className="flex flex-col md:flex-row gap-3 text-sm">
@@ -65,7 +65,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="max-w-11/12 mx-auto border-t border-red-500  my-6"></div>
+      <div className=" mx-auto border-t border-red-500  my-6"></div>
       <p className="text-center text-sm ">
           &copy; 2025 <span className="font-semibold">MovieMaster <span className="text-red-500">Pro</span> </span>. All rights reserved.
       </p>

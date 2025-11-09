@@ -3,62 +3,60 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
 
 const MovieCard = ({ movie }) => {
-  // expected movie shape:
-  // { id, title, poster, rating, genre, year }
+    console.log(movie);
   const {
-    id,
+   id,
     title,
-    poster,
-    rating = 5.0,
+posterUrl,
+    rating = 0,
     genre = "Unknown",
-    year = "20023",
+releaseYear = "_",
   } = movie || {};
 
-  const fallbackPoster =
-    "https://via.placeholder.com/400x600?text=No+Poster";
+  
 
   return (
     <div className="group relative rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow-sm hover:shadow-xl transition overflow-hidden">
    
-      <div className="aspect-[2/3] overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <div className=" max-h-100 overflow-hidden bg-gray-100 dark:bg-gray-800 border ">
         <img
-          src={poster || fallbackPoster}
+          src={posterUrl}
           alt={title}
           className="h-full w-full object-cover transform transition duration-300 group-hover:scale-[1.03]"
           loading="lazy"
         />
       </div>
+      <div className="p-4 space-y-3 ">
+        
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+            <span
+            className="text-lg font-semibold leading-snug line-clamp-2 ">
+            {title}
 
-      {/* Content */}
-      <div className="p-4 space-y-3">
-        {/* Title */}
-        <h3
-          className="text-lg font-semibold leading-snug line-clamp-2"
-          title={title}
-        >
-          {title}
-        </h3>
+            </span>
+         
+          
+           <span className="rounded-full ml-3.5 text-sm px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+            {
+releaseYear}
+          </span>
+          
+        </div>
+        
 
-        {/* Meta: Rating • Genre • Year */}
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          {/* Rating */}
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+         
           <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
             <FaStar className="inline-block" />
             <span>{Number(rating).toFixed(1)}</span>
           </span>
-
-          {/* Genre */}
           <span className="rounded-full px-2 py-0.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300">
             {Array.isArray(genre) ? genre.join(", ") : genre}
           </span>
-
-          {/* Year */}
-          <span className="rounded-full px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-            {year}
-          </span>
+          
         </div>
 
-        {/* Actions */}
+        
         <div className="pt-1">
           <Link
             to={`/movies/${id}`}
