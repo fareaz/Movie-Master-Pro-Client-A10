@@ -10,6 +10,7 @@ import Error from "../Pages/Error";
 import MovieDetails from "../Pages/MovieDetails";
 import PrivateRoute from "../Private/PrivateRoute";
 import UpdataPage from "../Pages/UpdataPage";
+import MyMovies from "../Pages/MyMovies";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/add-movie",
-    element: <AddMovie></AddMovie>,
+    element: <PrivateRoute><AddMovie></AddMovie></PrivateRoute>,
   },
   {
         path: 'movie/:id',
         element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,  
+      },
+  {
+        path: '/my-movies',
+        element: <PrivateRoute><MyMovies></MyMovies></PrivateRoute>,  
       },
   {
         path: '/edit-movie/:id',

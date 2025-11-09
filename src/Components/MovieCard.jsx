@@ -28,20 +28,17 @@ releaseYear = "_",
       </div>
       <div className="p-4 space-y-3 ">
         
-        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-            <span
-            className="text-sm font-semibold leading-snug line-clamp-2  md:text-lg      ">
-            {title}
+      <div className="flex items-center justify-between gap-2 text-sm w-full">
+  {/* Title (truncate but stays in one line) */}
+  <span className="flex-1 min-w-0 truncate font-semibold leading-snug text-sm md:text-lg">
+    {title}
+  </span>
 
-            </span>
-         
-          
-           <span className="rounded-full ml-3.5 text-sm px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-            {
-releaseYear}
-          </span>
-          
-        </div>
+  {/* Year (always stays right side) */}
+  <span className="flex-shrink-0 rounded-full ml-3 text-sm px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+    {releaseYear}
+  </span>
+</div>
         
 
         <div className="flex flex-wrap items-center justify-between gap-2 text-sm">

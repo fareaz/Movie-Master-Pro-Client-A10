@@ -74,7 +74,7 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl border border-red-500">
+    <div className="max-w-11/12 mx-auto mt-10  p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl border border-red-500">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
 
     <div>
