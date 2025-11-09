@@ -17,25 +17,33 @@ const Register = () => {
   const location = useLocation();
 
   const handleRegister = (event) => {
-    event.preventDefault();
-    const displayName = event.target.displayName.value;
-    const photoURL = event.target.photoURL.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+  event.preventDefault();
+  const displayName = event.target.displayName.value;
+  const photoURL = event.target.photoURL.value;
+  const email = event.target.email.value;
+  const password = event.target.password.value;
 
-    toast.loading("Creating user...", { id: "create-user" });
+  toast.loading("Creating user...", { id: "create-user" });
 
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        updateUserProfile(displayName, photoURL);
-        toast.success("User created successfully!", { id: "create-user" });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error(error.message, { id: "create-user" });
-      });
-  };
+  createUser(email, password)
+    .then(() => {
+      updateUserProfile(displayName, photoURL);
+
+      setSuccess(true);
+      setError("");
+
+      toast.success("User created successfully!", { id: "create-user" });
+
+      
+      navigate("/");
+    })
+    .catch((error) => {
+      setError(error.message);
+      setSuccess(false);
+
+      toast.error(error.message, { id: "create-user" });
+    });
+};
 
         const handleGoogleSignIn = () => {
      signInWithGoogle()

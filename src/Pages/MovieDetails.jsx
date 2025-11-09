@@ -15,7 +15,11 @@ const MovieDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/movieDetails/${id}`)
+      .get(`http://localhost:3000/movieDetails/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => {
         setMovie(res.data.result);
         setLoading(false);

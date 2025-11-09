@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Loading = ({ message = "Loading..." }) => {
   return (
-    <div className="border w-full p-0 text-zinc-200 relative overflow-hidden">
+    <div className=" w-full p-0 text-zinc-200 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-40 pointer-events-none"
         style={{

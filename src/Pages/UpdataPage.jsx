@@ -50,7 +50,11 @@ const UpdataPage = () => {
  
 
   axios
-    .put(`http://localhost:3000/movie/${movie._id}`, formData )
+    .put(`http://localhost:3000/movie/${movie._id}`, formData , {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            },
+        })
     .then((res) => {
       console.log("Update result:", res.data);
       if (res.data.success) {

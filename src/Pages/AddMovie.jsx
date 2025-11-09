@@ -28,7 +28,11 @@ const AddMovie = () => {
       addedBy: user.email
     }
      axios
-      .post("http://localhost:3000/movies", formData)
+      .post("http://localhost:3000/movies", formData , {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      }
+    })
       .then((data) => {
         console.log(data.data);
         toast.success("Successfully added!");
