@@ -3,9 +3,10 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
 
 const MovieCard = ({ movie }) => {
+    console.log(movie);
     
   const {
-   id,
+   _id,
     title,
 posterUrl,
     rating = 0,
@@ -18,7 +19,7 @@ releaseYear = "_",
   return (
     <div className="group relative rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow-sm hover:shadow-xl transition overflow-hidden">
    
-      <div className=" max-h-100 overflow-hidden bg-gray-100 dark:bg-gray-800 border ">
+      <div className=" max-h-100 overflow-hidden bg-gray-100 dark:bg-gray-800  ">
         <img
           src={posterUrl}
           alt={title}
@@ -30,7 +31,7 @@ releaseYear = "_",
         
         <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
             <span
-            className="text-lg font-semibold leading-snug line-clamp-2 ">
+            className="text-sm font-semibold leading-snug line-clamp-2  md:text-lg      ">
             {title}
 
             </span>
@@ -59,7 +60,7 @@ releaseYear}
         
         <div className="pt-1">
           <Link
-            to={`/movies/${id}`}
+            to={`/movie/${_id}`}
             className="inline-flex items-center justify-center w-full rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2.5 font-medium hover:from-red-700 hover:to-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition"
             aria-label={`View details for ${title}`}
           >
@@ -68,7 +69,7 @@ releaseYear}
         </div>
       </div>
 
-      {/* Subtle top glow on hover */}
+      
       <div className="pointer-events-none absolute inset-x-0 -top-10 h-10 blur-2xl opacity-0 group-hover:opacity-60 bg-red-500/30 transition" />
     </div>
   );
