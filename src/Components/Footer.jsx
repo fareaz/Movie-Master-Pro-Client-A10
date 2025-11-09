@@ -8,12 +8,12 @@ const Footer = () => {
     <footer className="  py-8  ">
       <div className=" mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
-          <h3 className="text-lg font-semibold text-red-500">Quick Links</h3>
+          <h3 className="text-lg font-semibold ">Quick <span className="text-red-500">Links</span></h3>
           <ul className="flex flex-col md:flex-row gap-3 text-sm">
             <li>
               <Link
 
-                className="hover:underline hover:text-red-200 "
+                className="hover:underline hover:text-red-800 "
               >
                 About
               </Link>
@@ -21,7 +21,7 @@ const Footer = () => {
             <li>
               <Link
 
-                className="hover:underline hover:text-red-200 "
+                className="hover:underline hover:text-red-800 "
               >
                 Contact
               </Link>
@@ -29,7 +29,7 @@ const Footer = () => {
             <li>
               <Link
 
-                className="hover:underline hover:text-red-200 "
+                className="hover:underline hover:text-red-800 "
               >
                 Privacy Policy
               </Link>
@@ -43,7 +43,7 @@ const Footer = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-red-200  hover:scale-110"
+            className="hover:text-red-800  hover:scale-110"
           >
             <FaInstagram />
           </a>
@@ -51,7 +51,7 @@ const Footer = () => {
             href="https://facebook.com"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-red-200 hover:scale-110"
+            className="hover:text-red-800 hover:scale-110"
           >
             <FaFacebookF />
           </a>
@@ -59,7 +59,7 @@ const Footer = () => {
             href="https://pinterest.com"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-red-200  hover:scale-110"
+            className="hover:text-red-800  hover:scale-110"
           >
             <RiTwitterXFill />
           </a>

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
 
 const MovieCard = ({ movie }) => {
-    console.log(movie);
+    
   const {
    id,
     title,

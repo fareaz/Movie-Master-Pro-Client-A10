@@ -6,11 +6,14 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import AllMovies from "../Pages/AllMovies";
 import AddMovie from "../Pages/AddMovie";
+import Error from "../Pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayOut></MainLayOut>,
+    hydrateFallbackElement: <Loading></Loading>,
+
     children: [
         {
     path: "/",
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
 
   {
     path: "*",
-    element: <Loading></Loading>,
+    element:<Error></Error>,
   },
 ]);
 

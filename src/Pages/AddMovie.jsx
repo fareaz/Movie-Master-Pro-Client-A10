@@ -3,6 +3,7 @@ import { FaFilm, FaUserAlt, FaStar, FaGlobe, FaClock, FaAlignLeft, FaLanguage, F
 import { AuthContext } from '../Context/AuthContext';
 import { toast } from 'react-toastify';
 import {  useContext } from "react";
+import axios from "axios";
 
  
 
@@ -12,34 +13,30 @@ const AddMovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     const formData = {
-      name: e.target.name.value,
-      category: e.target.category.value,
-      description: e.target.description.value,
-      thumbnail: e.target.thumbnail.value,
-      created_at: new Date(),
-      downloads: 0,
-      created_by: user.email
+      title: e.target.title.value,
+      genre: e.target.genre.value,
+      releaseYear: e.target.releaseYear.value,
+      director: e.target.director.value,
+      cast: e.target.cast.value,
+      rating: e.target.rating.value,
+      duration: e.target.duration.value,
+      plotSummary: e.target.plotSummary.value,
+      posterUrl: e.target.posterUrl.value,
+      language: e.target.language.value,
+      country: e.target.country.value,
+      addedBy: user.email
     }
-
-    fetch('https://3d-model-server.vercel.app/models', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data=> {
-      toast.success("Successfully added!")
-      console.log(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-   
-
+     axios
+      .post("http://localhost:3000/movies", formData)
+      .then((data) => {
+        console.log(data.data);
+        toast.success("Successfully added!");
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
     return (
          <div className="max-w-4xl mx-auto p-8 bg-transparent backdrop-blur-md glass-card rounded-2xl shadow-xl">
@@ -165,7 +162,7 @@ const AddMovie = () => {
           <input
             type="email"
             name="addedBy"
-            defaultValue="user@example.com"
+            defaultValue={user?.email}
             readOnly
             className="input text-gray-400 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none placeholder-gray-400 flex-1 cursor-not-allowed"
           />

@@ -61,7 +61,7 @@ const NavBar = () => {
           </ul>
         </div>
         <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
-          MovieMaster <span className='text-red-700'>Pro</span>
+          MovieMaster <span className='text-red-600'>Pro</span>
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
