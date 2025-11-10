@@ -11,6 +11,7 @@ import MovieDetails from "../Pages/MovieDetails";
 import PrivateRoute from "../Private/PrivateRoute";
 import UpdataPage from "../Pages/UpdataPage";
 import MyMovies from "../Pages/MyMovies";
+import WatchList from "../Pages/Watchlist";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
         path: '/my-movies',
         element: <PrivateRoute><MyMovies></MyMovies></PrivateRoute>,  
+      },
+  {
+        path: '/watch-list',
+        element: <PrivateRoute><WatchList></WatchList></PrivateRoute>,  
       },
   {
         path: '/edit-movie/:id',

@@ -167,6 +167,11 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/watch-list" className="hover:text-red-600">
+                  Watch List
+                </Link>
+              </li>
+              <li>
                 <a className="flex items-center gap-2">Settings</a>
               </li>
 
