@@ -4,9 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router";
 
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
 const Register = () => {
-  const { createUser,  updateUserProfile, signInWithGoogle } =
+  const { createUser, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
 
   const [success, setSuccess] = useState(false);
@@ -16,53 +17,74 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleRegister = (event) => {
+ const handleRegister = (event) => {
   event.preventDefault();
+
   const displayName = event.target.displayName.value;
   const photoURL = event.target.photoURL.value;
   const email = event.target.email.value;
   const password = event.target.password.value;
 
-  toast.loading("Creating user...", { id: "create-user" });
+ 
 
   createUser(email, password)
-    .then(() => {
-      updateUserProfile(displayName, photoURL);
-
-      setSuccess(true);
-      setError("");
-
-      toast.success("User created successfully!", { id: "create-user" });
-
-      
-      navigate("/");
+    .then((result) => {
+      const user = result.user;
+ 
+      return updateUserProfile(displayName, photoURL)
+        .then(() => {
+          
+          const newUser = {
+            name: displayName || user.displayName || "",
+            email: user.email,
+            photoURL: photoURL || user.photoURL || "",
+            
+            
+          };        
+          return axios.post("http://localhost:3000/users", newUser);
+        })
+        .then(() => {
+          toast.success("User created successfully!", { id: "create-user" });
+          setSuccess(true);
+          setError("");
+          navigate( "/");
+        });
     })
     .catch((error) => {
-      setError(error.message);
+  
+      console.error("Registration error:", error);
+      setError(error.message || "Registration failed");
       setSuccess(false);
-
-      toast.error(error.message, { id: "create-user" });
+      toast.error(error.message || "Registration failed", { id: "create-user" });
     });
 };
 
-        const handleGoogleSignIn = () => {
-     signInWithGoogle()
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        toast.success("Signin successful");
-        navigate(location?.state || "/");
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+        axios.post("http://localhost:3000/users", newUser).then(() => {
+          toast.success("Signin successful");
+          navigate(location?.state || "/");
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+
+
   return (
     <div className="hero bg-transparent min-h-screen">
       <div className="hero-content flex-col">
         <div className="text-center mb-4">
           <h1 className="text-5xl font-bold text-red-600">Register Now!</h1>
-         
         </div>
 
         <div className="card rounded-xl glass-card w-full max-w-sm shrink-0 shadow-xl">
@@ -78,7 +100,9 @@ const Register = () => {
                   required
                 />
 
-                <label className="block font-semibold text-red-700">Photo URL</label>
+                <label className="block font-semibold text-red-700">
+                  Photo URL
+                </label>
                 <input
                   type="url"
                   name="photoURL"
@@ -86,21 +110,25 @@ const Register = () => {
                   placeholder="Photo URL"
                 />
 
-                <label className="block font-semibold text-red-700">Email</label>
+                <label className="block font-semibold text-red-700">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
-                   className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 w-full"
+                  className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 w-full"
                   placeholder="Email Address"
                   required
                 />
 
-                <label className="block font-semibold text-red-700">Password</label>
+                <label className="block font-semibold text-red-700">
+                  Password
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                   className="input text-gray-600  rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 w-full"
+                    className="input text-gray-600  rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 w-full"
                     placeholder="Password"
                     autoComplete="new-password"
                     required
@@ -109,7 +137,9 @@ const Register = () => {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="btn-xs border-0 top-4 right-3 absolute"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
@@ -117,14 +147,15 @@ const Register = () => {
 
                 <button
                   type="submit"
-                 className="mt-3 w-full btn border-none hover:opacity-90 bg-gradient-to-r from-[#e11414] to-[#e13333] text-white font-bold"
+                  className="mt-3 w-full btn border-none hover:opacity-90 bg-gradient-to-r from-[#e11414] to-[#e13333] text-white font-bold"
                 >
                   Register
                 </button>
                 <button
                   type="button"
                   onClick={handleGoogleSignIn}
-                 className="flex items-center border justify-center gap-3 bg-transparent border-red-700  px-5 py-2 btn w-full font-semibold hover:bg-red-500/10 transition-colors cursor-pointer my-2">
+                  className="flex items-center border justify-center gap-3 bg-transparent border-red-700  px-5 py-2 btn w-full font-semibold hover:bg-red-500/10 transition-colors cursor-pointer my-2"
+                >
                   <img
                     src="https://www.svgrepo.com/show/475656/google-color.svg"
                     alt="google"
@@ -139,7 +170,9 @@ const Register = () => {
                   </p>
                 )}
                 {error && (
-                  <p className="text-red-500 text-center mt-2 max-w-70">{error}</p>
+                  <p className="text-red-500 text-center mt-2 max-w-70">
+                    {error}
+                  </p>
                 )}
               </fieldset>
             </form>
@@ -147,7 +180,7 @@ const Register = () => {
             <p className=" text-center">
               Already have an account?{" "}
               <Link className="text-red-700 underline" to="/login">
-                Login 
+                Login
               </Link>
             </p>
           </div>
@@ -158,4 +191,3 @@ const Register = () => {
 };
 
 export default Register;
-

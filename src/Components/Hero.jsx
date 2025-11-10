@@ -1,9 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { motion , AnimatePresence } from 'framer-motion';
 import Loading from '../Pages/Loading';
+import { AuthContext } from '../Context/AuthContext';
+import { useNavigate } from 'react-router';
 
 const Hero = () => {
+    const{user} = useContext(AuthContext)
+      const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -52,6 +56,13 @@ const Hero = () => {
   if (!movies.length) return <div className="w-full py-10 text-center">No movies found.</div>;
 
   const slides = movies.slice(0, 5);
+    const handleView = (movieId) => {
+    if (user && user.email) {
+      navigate(`/movie/${movieId}`);
+    } else {
+      navigate("/login", { state: { from: `/movie/${movieId}` } });
+    }
+  };
 
   return (
     <section className="relative  w-full overflow-hidden">
@@ -84,7 +95,13 @@ const Hero = () => {
                     <h2 className="text-2xl md:text-4xl font-bold leading-tight drop-shadow-lg">{movie.title}</h2>
                     <p className="mt-2 text-sm md:text-base text-gray-200 line-clamp-3">{movie.plotSummary}</p>
                     <div className="mt-4 flex gap-3">
-                      <button  className="px-4 py-2 rounded-lg  bg-opacity-10 border border-white/20 backdrop-blur-sm hover:border-red-400">Details</button>
+                      <button
+                    onClick={() => handleView(movie._id)}
+                    className="inline-flex items-center gap-2 px-3 py-1 border rounded-lg  hover:border-red-500  text-sm"
+                    aria-label={user ? `View ${movie.title}` : `Login to view ${movie.title}`}
+                  >
+                    Details
+                  </button>
                       
                     </div>
                   </div>

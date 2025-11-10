@@ -24,7 +24,7 @@ const WatchList = () => {
     setError("");
 
     axios
-      .get(`http://localhost:3000/my-watch-list?email=${encodeURIComponent(user.email)}`, {
+      .get(`http://localhost:3000/my-watch-list?email=${(user.email)}`, {
         headers: {
           authorization: `Bearer ${user?.accessToken || ""}`,
         },

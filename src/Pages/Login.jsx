@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router"; // <-- react-router-dom
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,10 +25,10 @@ const Login = () => {
 
     signInUser(email, password)
       .then(() => {
-        // success
+      
         toast.success("Login successful!");
         event.target.reset();
-        // navigate back to the original page (or '/')
+        
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -36,20 +37,29 @@ const Login = () => {
         setError(msg);
       });
   };
-
   const handleGoogleSignIn = () => {
-    setError("");
     signInWithGoogle()
-      .then(() => {
-        toast.success("Login successful!");
+      .then((result) => {
+        console.log(result.user);
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+        axios.post("http://localhost:3000/users", newUser).then(() => {
+           toast.success("Login successful!");
         navigate(from, { replace: true });
+        });
       })
-      .catch((err) => {
+       .catch((err) => {
         console.error("Google sign-in error:", err);
         const msg = err?.message || "Google sign-in failed";
         setError(msg);
       });
   };
+
+
+  
 
   const handleTogglePasswordShow = (event) => {
     event.preventDefault();
