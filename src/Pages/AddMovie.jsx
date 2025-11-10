@@ -63,16 +63,31 @@ const AddMovie = () => {
         </div>
 
      
-        <div className="flex items-center gap-3">
-          <FaGlobe className="text-red-500 text-xl" />
-          <input
-            type="text"
-            name="genre"
-            placeholder="Genre"
-            required
-            className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
-          />
-        </div>
+            <div className="flex items-center gap-3">
+         <FaGlobe className="text-red-500 text-xl" />
+       
+         <select
+         name="genre"
+         required
+         defaultValue= ""
+         className="select placeholder-gray-400 rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
+       >
+         <option value="" disabled>
+           Select Genre
+         </option>
+         <option value="Action">Action</option>
+         <option value="Adventure">Adventure</option>
+         <option value="Comedy">Comedy</option>
+         <option value="Drama">Drama</option>
+         <option value="Fantasy">Fantasy</option>
+         <option value="Horror">Horror</option>
+         <option value="Romance">Romance</option>
+         <option value="Sci-Fi">Sci-Fi</option>
+         <option value="Thriller">Thriller</option>
+         <option value="Animation">Animation</option>
+       </select>
+       
+       </div>
 
         {/* Release Year */}
         <div className="flex items-center gap-3">

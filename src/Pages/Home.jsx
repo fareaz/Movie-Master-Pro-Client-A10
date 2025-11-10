@@ -1,5 +1,6 @@
 
 import About from '../Components/About';
+import Genre from '../Components/Genre';
 import Hero from '../Components/Hero';
 import Recently from '../Components/Recently';
 import Statistics from '../Components/Statistics';
@@ -16,6 +17,7 @@ const Home = () => {
             <Statistics></Statistics>
             <TopRate></TopRate>
             <Recently></Recently>
+            <Genre></Genre>
             <About></About>
         </div>
     );

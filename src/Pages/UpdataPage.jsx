@@ -35,7 +35,7 @@ const UpdataPage = () => {
   const form = e.target;
   const formData = {
     title: form.title.value.trim(),
-    genre: form.genre.value.trim(),
+    genre: form.genre.value,
     releaseYear: Number(form.releaseYear.value) || null,
     director: form.director.value.trim(),
     cast: form.cast.value.trim(),
@@ -96,17 +96,32 @@ const UpdataPage = () => {
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <FaGlobe className="text-red-500 text-xl" />
-            <input
-              type="text"
-              name="genre"
-              placeholder="Genre"
-              required
-              defaultValue={movie.genre ?? ""}
-              className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 flex-1"
-            />
-          </div>
+         <div className="flex items-center gap-3">
+  <FaGlobe className="text-red-500 text-xl" />
+
+  <select
+  name="genre"
+  required
+  defaultValue={Array.isArray(movie.genre) ? movie.genre[0] : movie.genre ?? ""}
+  className="select rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
+>
+  <option value="" disabled>
+    Select Genre
+  </option>
+  <option value="Action">Action</option>
+  <option value="Adventure">Adventure</option>
+  <option value="Comedy">Comedy</option>
+  <option value="Drama">Drama</option>
+  <option value="Fantasy">Fantasy</option>
+  <option value="Horror">Horror</option>
+  <option value="Romance">Romance</option>
+  <option value="Sci-Fi">Sci-Fi</option>
+  <option value="Thriller">Thriller</option>
+  <option value="Animation">Animation</option>
+</select>
+
+</div>
+
 
           <div className="flex items-center gap-3">
             <FaCalendarAlt className="text-red-500 text-xl" />
