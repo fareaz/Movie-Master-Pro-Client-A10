@@ -15,7 +15,7 @@ const MainLayOut = () => {
     return (
          <div className="max-w-7xl mx-auto">
         <NavBar></NavBar>
-        <div className="mt-4">
+        <div className="min-h-screen">
           {/* {Loading ? <Loading></Loading> : <Outlet></Outlet>} */}
           <Outlet></Outlet> 
         </div>
