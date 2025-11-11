@@ -4,9 +4,6 @@ import { AuthContext } from '../Context/AuthContext';
 import { toast } from 'react-toastify';
 import {  useContext } from "react";
 import axios from "axios";
-
- 
-
 const AddMovie = () => {
     const { user } = useContext(AuthContext)
 
@@ -70,7 +67,7 @@ const AddMovie = () => {
          name="genre"
          required
          defaultValue= ""
-         className="select placeholder-gray-400 rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
+         className="select text-gray-400 rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
        >
          <option value="" disabled>
            Select Genre
@@ -85,6 +82,8 @@ const AddMovie = () => {
          <option value="Sci-Fi">Sci-Fi</option>
          <option value="Thriller">Thriller</option>
          <option value="Animation">Animation</option>
+         <option value="Biography">Biography</option>
+         <option value="Musical">Musical</option>
        </select>
        
        </div>

@@ -29,16 +29,16 @@ const Recently = () => {
   
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/hero")
-      .then((res) => {
-        const data = Array.isArray(res.data)
-          ? res.data
-          : res.data.result || res.data.movies || res.data.data || res.data;
-        const arr = Array.isArray(data) ? data : [];
-        setMovies(arr.slice(0, 5)); // limit 5 latest movies
-      })
-      .catch((e) => setError(e.message))
+   axios
+  .get("http://localhost:3000/hero")
+  .then((res) => {
+    const data = Array.isArray(res.data)
+      ? res.data
+      : res.data.result || res.data.movies || res.data.data || res.data;
+    const arr = Array.isArray(data) ? data : [];
+    setMovies(arr); 
+  })
+  .catch((e) => setError(e.message));
     
   }, []);
 

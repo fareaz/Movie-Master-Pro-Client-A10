@@ -17,47 +17,55 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
- const handleRegister = (event) => {
-  event.preventDefault();
-
-  const displayName = event.target.displayName.value;
-  const photoURL = event.target.photoURL.value;
-  const email = event.target.email.value;
-  const password = event.target.password.value;
-
- 
-
-  createUser(email, password)
-    .then((result) => {
-      const user = result.user;
- 
-      return updateUserProfile(displayName, photoURL)
-        .then(() => {
-          
-          const newUser = {
-            name: displayName || user.displayName || "",
-            email: user.email,
-            photoURL: photoURL || user.photoURL || "",
-            
-            
-          };        
-          return axios.post("http://localhost:3000/users", newUser);
-        })
-        .then(() => {
-          toast.success("User created successfully!", { id: "create-user" });
-          setSuccess(true);
-          setError("");
-          navigate( "/");
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const displayName = event.target.displayName.value;
+    const photoURL = event.target.photoURL.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+      if (!emailPattern.test(email)) {
+        setError("Please enter a valid email address.");
+        toast.error("Please enter a valid email address.");
+        return;
+      }
+    
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordPattern.test(password)) {
+          setError(
+            "Password must include uppercase and lowercase(min 6 chars)."
+          );
+          return;
+        }
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        return updateUserProfile(displayName, photoURL)
+          .then(() => {
+            const newUser = {
+              name: displayName || user.displayName || "",
+              email: user.email,
+              photoURL: photoURL || user.photoURL || "",
+            };
+            return axios.post("http://localhost:3000/users", newUser);
+          })
+          .then(() => {
+            toast.success("User created successfully!", { id: "create-user" });
+            setSuccess(true);
+            setError("");
+            navigate("/");
+          });
+      })
+      .catch((error) => {
+        console.error("Registration error:", error);
+        setError(error.message || "Registration failed");
+        setSuccess(false);
+        toast.error(error.message || "Registration failed", {
+          id: "create-user",
         });
-    })
-    .catch((error) => {
-  
-      console.error("Registration error:", error);
-      setError(error.message || "Registration failed");
-      setSuccess(false);
-      toast.error(error.message || "Registration failed", { id: "create-user" });
-    });
-};
+      });
+  };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
@@ -77,8 +85,6 @@ const Register = () => {
         console.log(error);
       });
   };
-
-
 
   return (
     <div className="hero bg-transparent min-h-screen">

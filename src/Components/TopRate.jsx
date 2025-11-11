@@ -18,15 +18,12 @@ const cardItem = {
   hidden: { opacity: 0, y: 12, scale: 0.99 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
-
 const TopRate = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
- 
-
   useEffect(() => {
     axios
       .get("http://localhost:3000/top-rate")

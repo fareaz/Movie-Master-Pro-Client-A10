@@ -19,10 +19,8 @@ const MyMovies = () => {
       setLoading(false);
       return;
     }
-
     setLoading(true);
     setError("");
-
     axios
       .get(`http://localhost:3000/my-movies?email=${(user.email)}`, {
         headers: {
@@ -90,13 +88,11 @@ const MyMovies = () => {
         });
     });
   };
-
   return (
     <div className="max-w-5xl mx-auto p-6 min-h-screen ">
       <h2 className="text-3xl font-bold mb-6 text-center ">
         My <span className="text-red-500">Movies</span>
       </h2>
-
       {movies.length === 0 ? (
         <p className="text-center text-gray-500">You haven’t added any movies yet.</p>
       ) : (

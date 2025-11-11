@@ -5,28 +5,22 @@ import MovieCard from "../Components/MovieCard";
 import Loading from "./Loading";
 
 const GenreMovies = () => {
-  const { name } = useParams(); // URL থেকে genre নাম নিচ্ছে
+  const { name } = useParams(); 
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchGenreMovies = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get("http://localhost:3000/filter-movies", {
-          params: { genres: name },
-        });
-        setMovies(res.data.result || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGenreMovies();
-  }, [name]);
+useEffect(() => {
+  setLoading(true);
+  setError("");
+  axios
+    .get("http://localhost:3000/filter-movies", {
+      params: { genres: name },
+    })
+    .then((res) => setMovies(res.data.result || []))
+    .catch((err) => setError(err.message))
+    .finally(() => setLoading(false));
+}, [name]);
 
   if (loading) return <Loading />;
   if (error) return <p className="text-red-500 text-center mt-6">Error: {error}</p>;

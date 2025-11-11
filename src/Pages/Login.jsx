@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate, useLocation } from "react-router"; // <-- react-router-dom
+import { Link, useNavigate, useLocation } from "react-router"; 
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
@@ -9,12 +9,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const emailRef = useRef();
-
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
-
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || "/"; // where to return after login
+  const from = location.state?.from || "/";
 
   const handleLogIn = (event) => {
     event.preventDefault();
@@ -25,15 +23,15 @@ const Login = () => {
 
     signInUser(email, password)
       .then(() => {
-      
         toast.success("Login successful!");
         event.target.reset();
-        
+
         navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error("Login error:", err);
-        const msg = err?.message || "Login failed";
+        const msg = (err, "No account found. Please check your email or password./");
+        toast.error(msg)
         setError(msg);
       });
   };
@@ -47,19 +45,16 @@ const Login = () => {
           image: result.user.photoURL,
         };
         axios.post("http://localhost:3000/users", newUser).then(() => {
-           toast.success("Login successful!");
-        navigate(from, { replace: true });
+          toast.success("Login successful!");
+          navigate(from, { replace: true });
         });
       })
-       .catch((err) => {
+      .catch((err) => {
         console.error("Google sign-in error:", err);
         const msg = err?.message || "Google sign-in failed";
         setError(msg);
       });
   };
-
-
-  
 
   const handleTogglePasswordShow = (event) => {
     event.preventDefault();
@@ -77,13 +72,15 @@ const Login = () => {
           <div className="card-body">
             <form onSubmit={handleLogIn}>
               <fieldset className="fieldset">
-                <label className="block font-semibold text-red-700">Email</label>
+                <label className="block font-semibold text-red-700">
+                  Email
+                </label>
                 <input
                   id="email"
                   type="email"
                   name="email"
                   autoComplete="email"
-                  className="input text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400"
+                  className="input w-full text-gray-600 rounded-lg border border-red-400 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400"
                   ref={emailRef}
                   placeholder="Email"
                   required

@@ -23,15 +23,9 @@ const UpdataPage = () => {
   const data = useLoaderData();
   const movie = data?.result ?? data; 
   const navigate = useNavigate();
-
-  console.log("loader data raw:", data);
-  console.log("movie:", movie);
-
-  if (!movie) return <div>Movie not found</div>;
-
+ 
   const handleUpdate = (e) => {
   e.preventDefault();
-
   const form = e.target;
   const formData = {
     title: form.title.value.trim(),
@@ -103,7 +97,7 @@ const UpdataPage = () => {
   name="genre"
   required
   defaultValue={Array.isArray(movie.genre) ? movie.genre[0] : movie.genre ?? ""}
-  className="select rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
+  className="select rounded-lg border text-gray-500 border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500  flex-1"
 >
   <option value="" disabled>
     Select Genre
@@ -118,6 +112,8 @@ const UpdataPage = () => {
   <option value="Sci-Fi">Sci-Fi</option>
   <option value="Thriller">Thriller</option>
   <option value="Animation">Animation</option>
+  <option value="Biography">Biography</option>
+  <option value="Musical">Musical</option>
 </select>
 
 </div>

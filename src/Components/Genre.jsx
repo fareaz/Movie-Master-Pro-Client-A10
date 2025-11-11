@@ -19,10 +19,10 @@ const genres = [
 ];
 
 const Genre = () => {
-  const navigate = useNavigate(); // 👈 initialize navigate
+  const navigate = useNavigate(); 
 
   const handleGenreClick = (genre) => {
-    navigate(`/genre/${genre}`); // 👈 go to genre page
+    navigate(`/genre/${genre}`);
   };
 
   return (
@@ -54,7 +54,7 @@ const Genre = () => {
                 visible: { opacity: 1, y: 0 },
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              onClick={() => handleGenreClick(genre)} // 👈 navigate on click
+              onClick={() => handleGenreClick(genre)} 
               className="flex items-center justify-center gap-2 py-4 px-3 bg-white/80 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-xl shadow hover:shadow-lg hover:scale-[1.05] transition-all duration-300 cursor-pointer select-none"
             >
               <FaFilm className="text-red-500" />

@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import MovieCard from "../Components/MovieCard";
 import Loading from "./Loading";
 import axios from "axios";
 
+
 const AllMovies = () => {
   const [movies, setMovies] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
 
-  useEffect(() => {
-    fetchAllMovies();
-  }, []);
+useEffect( () => {
+  setLoading(true);
+  axios
+    .get("http://localhost:3000/movies")
+    .then((res) => {
+      setMovies(res.data);
+      setError("");
+    })
+    .catch((err) => setError(err.message))
+    .finally(() => setLoading(false));
+}, []);
 
-  const fetchAllMovies = () => {
-    setLoading(true);
-    axios
-      .get("http://localhost:3000/movies")
-      .then((res) => {
-        setMovies(res.data);
-        setError("");
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  };
 
   const handleFilter = (genre, rating) => {
     setLoading(true);
@@ -36,12 +35,6 @@ const AllMovies = () => {
       params.minRating = min;
       params.maxRating = max;
     }
-
-    if (!Object.keys(params).length) {
-      fetchAllMovies();
-      return;
-    }
-
     axios
       .get("http://localhost:3000/filter-movies", { params })
       .then((res) => setMovies(res.data.result || []))
@@ -71,6 +64,17 @@ const AllMovies = () => {
     "5-7",
     "0-5",
   ];
+   const handleSearch = (e) => {
+    e.preventDefault()
+    const search_text = e.target.search.value
+    setLoading(true)
+    fetch(`http://localhost:3000/search?search=${search_text}`)
+    .then(res=> res.json())
+    .then(data=> {
+      setMovies(data)
+      setLoading(false)
+    })
+  }
 
   if (loading) return <Loading />;
   if (error) return <p className="text-red-500 text-center">Error: {error}</p>;
@@ -80,11 +84,32 @@ const AllMovies = () => {
       <h1 className="text-3xl font-bold text-center mb-6">
         All <span className="text-red-500">Movies</span>
       </h1>
-
+ <form onSubmit={handleSearch}  className="flex gap-2 justify-center mb-10">
+       <label className="input rounded-full ">
+        <svg
+          className="h-[1em] opacity-50"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input name="search" type="search"  placeholder="Search" />
+      </label>
+      <button className="btn text-white bg-red-600 hover:bg-red-700  rounded-full">{loading ? "Searching...." : "Search"}</button>
+     </form>
 
      <div className="flex  justify-between items-center gap-3 mb-6">
-  
-  <select
+   
+     <select
     className=" select select-error h-9 text-sm font-bold w-30 px-2 py-1 rounded-md border border-red-400 bg-white dark:bg-gray-800 focus:ring-1 focus:ring-red-500"
     value={selectedGenre}
     onChange={(e) => {
@@ -102,9 +127,7 @@ const AllMovies = () => {
       </option>
     ))}
   </select>
-
-
-  <select
+    <select
     className=" select select-error h-9 font-bold text-sm w-30 px-2 py-1 rounded-md border border-red-400 bg-white dark:bg-gray-800 focus:ring-1 focus:ring-red-500"
     value={selectedRating}
     onChange={(e) => {
@@ -122,6 +145,10 @@ const AllMovies = () => {
       </option>
     ))}
   </select>
+ 
+ 
+     
+
 </div>
 
 
