@@ -26,7 +26,6 @@ const MovieDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-
     axios
       .get(`http://localhost:3000/movieDetails/${id}`)
       .then((res) => {
@@ -40,14 +39,11 @@ const MovieDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    // if no user or no movie yet, skip
     if (!user?.email || !movie) {
       setIsAdded(false);
       setWatchItemId(null);
       return;
     }
-
-
     setIsProcessing(true);
     axios
       .get("http://localhost:3000/my-watch-list", {
@@ -129,7 +125,7 @@ const MovieDetails = () => {
     });
   };
 
-  // Add to watchlist
+
   const handleAddToWatchList = () => {
     if (!user?.email) {
       Swal.fire({
@@ -145,7 +141,7 @@ const MovieDetails = () => {
     setIsProcessing(true);
 
     const payload = {
-      movieId: movie._id,
+        movieId: String(movie._id),
       title: movie.title,
       posterUrl: movie.posterUrl || movie.poster || "",
       addedBy: user.email,

@@ -26,7 +26,6 @@ const WatchList = () => {
     }
     setLoading(true);
     setError("");
-
     axios
       .get(`http://localhost:3000/my-watch-list`, {
         params: { email: user.email },
@@ -68,8 +67,6 @@ const WatchList = () => {
      
       if (isProcessing) return;
       setIsProcessing(true);
-
-      // call delete endpoint (server supports _id or movieId)
       axios
         .delete(`http://localhost:3000/watch-list/${(String(id))}`, {
           headers: authHeaders(),

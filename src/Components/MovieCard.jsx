@@ -33,7 +33,7 @@ const MovieCard = ({ movie }) => {
 
       <div className="p-4 space-y-3">
         <div className="flex items-center justify-between gap-2 text-sm w-full">
-          <span className="flex-1 min-w-0 truncate font-semibold leading-snug text-sm md:text-lg">
+          <span className="flex-1 min-w-0 truncate font-semibold leading-snug text-sm md:text-lg line-clamp-1 ">
             {title}
           </span>
 
@@ -42,15 +42,16 @@ const MovieCard = ({ movie }) => {
           </span>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-          <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+        <div className="flex md:flex-wrap items-center justify-between  line-clamp-1 gap-2 text-sm">
+            <span className="rounded-full  line-clamp-1 px-2 py-0.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 ">
+            {Array.isArray(genre) ? genre.join(", ") : genre}
+          </span>
+          <span className="inline-flex  line-clamp-1 items-center gap-1 rounded-full px-2 py-0.5 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
             <FaStar className="inline-block" />
             <span>{Number(rating).toFixed(1)}</span>
           </span>
 
-          <span className="rounded-full px-2 py-0.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300">
-            {Array.isArray(genre) ? genre.join(", ") : genre}
-          </span>
+          
         </div>
 
         <div className="pt-1">
