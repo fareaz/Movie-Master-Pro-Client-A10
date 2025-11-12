@@ -106,42 +106,37 @@ const TopRate = () => {
                 </p>
 
                 <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{
-                        delay: 0.15 + idx * 0.05,
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 18,
-                      }}
-                      className="inline-flex items-center gap-2 px-3 py-1 rounded-lg border text-red-500 font-semibold text-sm"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden
-                      >
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                      <span>{Number(movie.rating ?? 0)}</span>
-                    </motion.div>
-                  </div>
+  <div
+    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 `py-[2px]` sm:py-1 rounded-lg border border-red-400 
+               text-red-500 font-semibold text-xs sm:text-sm bg-white/10"
+  >
+    <svg
+      className="w-3 h-3 sm:w-4 sm:h-4"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+    <span>{Number(movie.rating ?? 0)}</span>
+  </div>
 
-                  <button
-                    onClick={() => handleView(movie._id)}
-                    className="inline-flex items-center gap-2 px-3 py-1 border rounded-lg  hover:border-red-500  text-sm"
-                    aria-label={
-                      user
-                        ? `View ${movie.title}`
-                        : `Login to view ${movie.title}`
-                    }
-                  >
-                    View
-                  </button>
-                </div>
+  {/* View button */}
+  <button
+    onClick={() => handleView(movie._id)}
+    className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-[2px] sm:py-1 
+               border rounded-lg text-xs sm:text-sm 
+               hover:border-red-500 transition-all hover:bg-red-50 dark:hover:bg-red-900/20"
+    aria-label={
+      user
+        ? `View ${movie.title}`
+        : `Login to view ${movie.title}`
+    }
+  >
+    View
+  </button>
+</div>
+
               </div>
             </motion.article>
           ))}
