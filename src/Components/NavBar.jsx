@@ -96,6 +96,14 @@ const NavBar = () => {
                 All Movies
               </NavLink>
             </li>
+             {user && (
+              <li>
+                <NavLink to={"/add-movie"}>
+                  <MdMovieEdit />
+                  Add Movie
+                </NavLink>
+              </li>
+            )}
             <li className="sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
   <div className="flex items-center gap-2 text-sm font-medium">
     <span className="text-gray-600 dark:text-gray-400">Light</span>
@@ -109,14 +117,7 @@ const NavBar = () => {
   </div>
 </li>
 
-            {user && (
-              <li>
-                <NavLink to={"/add-movie"}>
-                  <MdMovieEdit />
-                  Add Movie
-                </NavLink>
-              </li>
-            )}
+           
           </ul>
         </div>
         <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
@@ -187,6 +188,8 @@ const NavBar = () => {
               <li>
                 <a className="flex items-center gap-2">Settings</a>
               </li>
+
+             
 
               <li>
                 <button
