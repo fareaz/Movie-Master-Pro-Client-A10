@@ -107,7 +107,7 @@ const TopRate = () => {
 
                 <div className="mt-4 flex items-center justify-between">
   <div
-    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 `py-[2px]` sm:py-1 rounded-lg border border-red-400 
+    className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-[2px] sm:py-1 rounded-lg border border-red-400 
                text-red-500 font-semibold text-xs sm:text-sm bg-white/10"
   >
     <svg

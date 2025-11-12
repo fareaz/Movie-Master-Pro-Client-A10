@@ -96,6 +96,19 @@ const NavBar = () => {
                 All Movies
               </NavLink>
             </li>
+            <li className="sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+  <div className="flex items-center gap-2 text-sm font-medium">
+    <span className="text-gray-600 dark:text-gray-400">Light</span>
+    <input
+      onChange={(e) => handleTheme(e.target.checked)}
+      type="checkbox"
+      checked={theme === "dark"}
+      className="toggle toggle-sm bg-gray-300 border-gray-400"
+    />
+    <span className="text-gray-600 dark:text-gray-400">Dark</span>
+  </div>
+</li>
+
             {user && (
               <li>
                 <NavLink to={"/add-movie"}>
@@ -175,19 +188,6 @@ const NavBar = () => {
                 <a className="flex items-center gap-2">Settings</a>
               </li>
 
-              <li className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-                <div className="flex items-center gap-2 text-sm font-medium">
-                  <span className="text-gray-600 dark:text-gray-400">Light</span>
-                  <input
-                    onChange={(e) => handleTheme(e.target.checked)}
-                    type="checkbox"
-                    checked={theme === "dark"}
-                    className="toggle toggle-sm bg-gray-300 border-gray-400"
-                  />
-                  <span className="text-gray-600 dark:text-gray-400">Dark</span>
-                </div>
-              </li>
-
               <li>
                 <button
                   onClick={handleLogout} 
@@ -213,6 +213,19 @@ const NavBar = () => {
             >
               Register
             </Link>
+            <li className="hidden sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+  <div className="flex items-center gap-2 text-sm font-medium">
+    <span className="text-gray-600 dark:text-gray-400">Light</span>
+    <input
+      onChange={(e) => handleTheme(e.target.checked)}
+      type="checkbox"
+      checked={theme === "dark"}
+      className="toggle toggle-sm bg-gray-300 border-gray-400"
+    />
+    <span className="text-gray-600 dark:text-gray-400">Dark</span>
+  </div>
+</li>
+
           </>
         )}
       </div>
