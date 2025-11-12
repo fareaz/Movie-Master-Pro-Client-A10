@@ -17,58 +17,59 @@ import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const UpdataPage = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const movie = data?.result ?? data; 
+  const movie = data?.result ?? data;
   const navigate = useNavigate();
- 
+
   const handleUpdate = (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const formData = {
-    title: form.title.value.trim(),
-    genre: form.genre.value,
-    releaseYear: Number(form.releaseYear.value) || null,
-    director: form.director.value.trim(),
-    cast: form.cast.value.trim(),
-    rating: parseFloat(form.rating.value) || null,
-    duration: Number(form.duration.value) || null,
-    plotSummary: form.plotSummary.value.trim(),
-    posterUrl: form.posterUrl.value.trim(),
-    language: form.language.value.trim(),
-    country: form.country.value.trim(),
-    addedBy: user?.email || form.addedBy.value,
+    e.preventDefault();
+    const form = e.target;
+    const formData = {
+      title: form.title.value.trim(),
+      genre: form.genre.value,
+      releaseYear: Number(form.releaseYear.value) || null,
+      director: form.director.value.trim(),
+      cast: form.cast.value.trim(),
+      rating: parseFloat(form.rating.value) || null,
+      duration: Number(form.duration.value) || null,
+      plotSummary: form.plotSummary.value.trim(),
+      posterUrl: form.posterUrl.value.trim(),
+      language: form.language.value.trim(),
+      country: form.country.value.trim(),
+      addedBy: user?.email || form.addedBy.value,
+    };
+
+    axios
+      .put(
+        `https://movie-master-server-theta.vercel.app/movie/${movie._id}`,
+        formData,
+        {
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("Update result:", res.data);
+        if (res.data.success) {
+          toast.success(" Movie updated successfully!");
+          navigate(`/movie/${movie._id}`);
+        } else {
+          toast.error(" Movie update failed. Please try again.");
+        }
+      })
+      .catch((err) => {
+        console.error("Update error:", err);
+        const msg =
+          err?.response?.data?.message ||
+          err?.response?.data ||
+          err?.message ||
+          "Unknown error updating movie";
+        toast.error(" Error updating movie: " + msg);
+      });
   };
- 
-
-  axios
-    .put(`http://localhost:3000/movie/${movie._id}`, formData , {
-            headers: {
-                authorization: `Bearer ${user.accessToken}`
-            },
-        })
-    .then((res) => {
-      console.log("Update result:", res.data);
-      if (res.data.success) {
-        toast.success(" Movie updated successfully!");
-        navigate(`/movie/${movie._id}`);
-      } else {
-        toast.error(" Movie update failed. Please try again.");
-      }
-    })
-    .catch((err) => {
-      console.error("Update error:", err);
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data ||
-        err?.message ||
-        "Unknown error updating movie";
-      toast.error(" Error updating movie: " + msg);
-    })
-
-};
 
   return (
     <div>
@@ -77,7 +78,10 @@ const UpdataPage = () => {
           Update <span className="text-red-500">Movie</span>
         </h2>
 
-        <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form
+          onSubmit={handleUpdate}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <div className="flex items-center gap-3">
             <FaFilm className="text-red-500 text-xl" />
             <input
@@ -90,34 +94,34 @@ const UpdataPage = () => {
             />
           </div>
 
-         <div className="flex items-center gap-3">
-  <FaGlobe className="text-red-500 text-xl" />
+          <div className="flex items-center gap-3">
+            <FaGlobe className="text-red-500 text-xl" />
 
-  <select
-  name="genre"
-  required
-  defaultValue={Array.isArray(movie.genre) ? movie.genre[0] : movie.genre ?? ""}
-  className="select rounded-lg border text-gray-500 border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500  flex-1"
->
-  <option value="" disabled>
-    Select Genre
-  </option>
-  <option value="Action">Action</option>
-  <option value="Adventure">Adventure</option>
-  <option value="Comedy">Comedy</option>
-  <option value="Drama">Drama</option>
-  <option value="Fantasy">Fantasy</option>
-  <option value="Horror">Horror</option>
-  <option value="Romance">Romance</option>
-  <option value="Sci-Fi">Sci-Fi</option>
-  <option value="Thriller">Thriller</option>
-  <option value="Animation">Animation</option>
-  <option value="Biography">Biography</option>
-  <option value="Musical">Musical</option>
-</select>
-
-</div>
-
+            <select
+              name="genre"
+              required
+              defaultValue={
+                Array.isArray(movie.genre) ? movie.genre[0] : movie.genre ?? ""
+              }
+              className="select rounded-lg border text-gray-500 border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500  flex-1"
+            >
+              <option value="" disabled>
+                Select Genre
+              </option>
+              <option value="Action">Action</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Drama">Drama</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Horror">Horror</option>
+              <option value="Romance">Romance</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Animation">Animation</option>
+              <option value="Biography">Biography</option>
+              <option value="Musical">Musical</option>
+            </select>
+          </div>
 
           <div className="flex items-center gap-3">
             <FaCalendarAlt className="text-red-500 text-xl" />

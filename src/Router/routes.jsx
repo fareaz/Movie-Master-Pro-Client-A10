@@ -14,7 +14,6 @@ import MyMovies from "../Pages/MyMovies";
 import WatchList from "../Pages/Watchlist";
 import GenreMovies from "../Pages/GenreMovies";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,53 +21,76 @@ const router = createBrowserRouter([
     hydrateFallbackElement: <Loading></Loading>,
 
     children: [
-        {
-    path: "/",
-    element: <Home></Home>,
-  },
-  {
-    path: "/all-movies",
-    element: <AllMovies></AllMovies>,
-  },
-  {
-    path: "/add-movie",
-    element: <PrivateRoute><AddMovie></AddMovie></PrivateRoute>,
-  },
-  {
-    path: "/genre/:name",
-  element: <GenreMovies></GenreMovies>,
-  },
-  {
-        path: 'movie/:id',
-        element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,  
+      {
+        path: "/",
+        element: <Home></Home>,
       },
-  {
-        path: '/my-movies',
-        element: <PrivateRoute><MyMovies></MyMovies></PrivateRoute>,  
+      {
+        path: "/all-movies",
+        element: <AllMovies></AllMovies>,
       },
-  {
-        path: '/watch-list',
-        element: <PrivateRoute><WatchList></WatchList></PrivateRoute>,  
+      {
+        path: "/add-movie",
+        element: (
+          <PrivateRoute>
+            <AddMovie></AddMovie>
+          </PrivateRoute>
+        ),
       },
-  {
-        path: '/edit-movie/:id',
-        element: <PrivateRoute><UpdataPage></UpdataPage></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:3000/movieDetails/${params.id}`)
+      {
+        path: "/genre/:name",
+        element: <GenreMovies></GenreMovies>,
       },
-  {
-     path: "/login",
-    element: <Login></Login>,
-},
-{
-     path: "/register",
-    element: <Register></Register>,
-},
-    ]
+      {
+        path: "movie/:id",
+        element: (
+          <PrivateRoute>
+            <MovieDetails></MovieDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-movies",
+        element: (
+          <PrivateRoute>
+            <MyMovies></MyMovies>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/watch-list",
+        element: (
+          <PrivateRoute>
+            <WatchList></WatchList>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/edit-movie/:id",
+        element: (
+          <PrivateRoute>
+            <UpdataPage></UpdataPage>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://movie-master-server-theta.vercel.app/movieDetails/${params.id}`
+          ),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
   },
 
   {
     path: "*",
-    element:<Error></Error>,
+    element: <Error></Error>,
   },
 ]);
 

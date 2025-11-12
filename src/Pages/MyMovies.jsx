@@ -22,11 +22,14 @@ const MyMovies = () => {
     setLoading(true);
     setError("");
     axios
-      .get(`http://localhost:3000/my-movies?email=${(user.email)}`, {
-        headers: {
-          authorization: `Bearer ${user?.accessToken || ""}`,
-        },
-      })
+      .get(
+        `https://movie-master-server-theta.vercel.app/my-movies?email=${user.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${user?.accessToken || ""}`,
+          },
+        }
+      )
       .then((res) => setMovies(res.data || []))
       .catch((e) => setError(e.message || "Failed to load movies"))
       .finally(() => setLoading(false));
@@ -49,7 +52,6 @@ const MyMovies = () => {
     }).then((result) => {
       if (!result.isConfirmed) return;
 
-    
       Swal.fire({
         title: "Deleting...",
         allowOutsideClick: false,
@@ -59,11 +61,14 @@ const MyMovies = () => {
       });
 
       axios
-        .delete(`http://localhost:3000/movies/${movieId}`, {
-          headers: {
-            authorization: `Bearer ${user?.accessToken || ""}`,
-          },
-        })
+        .delete(
+          `https://movie-master-server-theta.vercel.app/movies/${movieId}`,
+          {
+            headers: {
+              authorization: `Bearer ${user?.accessToken || ""}`,
+            },
+          }
+        )
         .then(() => {
           setMovies((prev) => prev.filter((m) => m._id !== movieId));
 
@@ -74,7 +79,6 @@ const MyMovies = () => {
             confirmButtonColor: "#e3342f",
           });
 
-         
           navigate("/my-movies");
         })
         .catch((err) => {
@@ -94,7 +98,9 @@ const MyMovies = () => {
         My <span className="text-red-500">Movies</span>
       </h2>
       {movies.length === 0 ? (
-        <p className="text-center text-gray-500">You haven’t added any movies yet.</p>
+        <p className="text-center text-gray-500">
+          You haven’t added any movies yet.
+        </p>
       ) : (
         <div className="space-y-4">
           {movies.map((movie, index) => (
@@ -102,14 +108,22 @@ const MyMovies = () => {
               key={movie._id}
               className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-red-400 rounded-xl p-3 md:p-4 shadow-sm"
             >
-              <div className="w-8 flex-shrink-0 text-center font-semibold ">{index + 1}</div>
+              <div className="w-8 flex-shrink-0 text-center font-semibold ">
+                {index + 1}
+              </div>
 
               <div className="w-20 h-28 sm:w-24 sm:h-32 flex-shrink-0 overflow-hidden rounded-md">
-                <img src={movie.posterUrl} alt={movie.title} className="w-full h-full object-cover" />
+                <img
+                  src={movie.posterUrl}
+                  alt={movie.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-lg font-semibold truncate">{movie.title}</h3>
+                <h3 className="text-lg font-semibold truncate">
+                  {movie.title}
+                </h3>
                 <p className="text-sm text-gray-500 truncate">
                   {movie.genre} • {movie.releaseYear}
                 </p>
@@ -140,7 +154,9 @@ const MyMovies = () => {
                     </button>
                   </>
                 ) : (
-                  <div className="text-xs text-gray-500 italic">Not your movie</div>
+                  <div className="text-xs text-gray-500 italic">
+                    Not your movie
+                  </div>
                 )}
               </div>
             </div>

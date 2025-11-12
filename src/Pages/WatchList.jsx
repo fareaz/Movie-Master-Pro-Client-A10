@@ -27,7 +27,7 @@ const WatchList = () => {
     setLoading(true);
     setError("");
     axios
-      .get(`http://localhost:3000/my-watch-list`, {
+      .get(`https://movie-master-server-theta.vercel.app/my-watch-list`, {
         params: { email: user.email },
         headers: authHeaders(),
       })
@@ -68,7 +68,7 @@ const WatchList = () => {
       if (isProcessing) return;
       setIsProcessing(true);
       axios
-        .delete(`http://localhost:3000/watch-list/${(String(id))}`, {
+        .delete(`https://movie-master-server-theta.vercel.app/watch-list/${(String(id))}`, {
           headers: authHeaders(),
           params: { email: user.email }, 
         })

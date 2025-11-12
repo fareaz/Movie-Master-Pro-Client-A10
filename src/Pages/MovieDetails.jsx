@@ -15,9 +15,8 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isAdded, setIsAdded] = useState(false); 
+  const [isAdded, setIsAdded] = useState(false);
   const [watchItemId, setWatchItemId] = useState(null);
-
 
   const authHeaders = () => {
     const token = user?.accessToken || user?.stsTokenManager?.accessToken || "";
@@ -27,7 +26,7 @@ const MovieDetails = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/movieDetails/${id}`)
+      .get(`https://movie-master-server-theta.vercel.app/movieDetails/${id}`)
       .then((res) => {
         setMovie(res.data?.result || null);
       })
@@ -46,7 +45,7 @@ const MovieDetails = () => {
     }
     setIsProcessing(true);
     axios
-      .get("http://localhost:3000/my-watch-list", {
+      .get("https://movie-master-server-theta.vercel.app/my-watch-list", {
         params: { email: user.email },
         headers: authHeaders(),
       })
@@ -61,7 +60,7 @@ const MovieDetails = () => {
 
         if (found) {
           setIsAdded(true);
-       
+
           setWatchItemId(found._id || found.movieId || null);
         } else {
           setIsAdded(false);
@@ -70,7 +69,7 @@ const MovieDetails = () => {
       })
       .catch((err) => {
         console.error("Watchlist check error:", err);
-       
+
         setIsAdded(false);
         setWatchItemId(null);
       })
@@ -100,9 +99,12 @@ const MovieDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/movies/${movie._id}`, {
-            headers: authHeaders(),
-          })
+          .delete(
+            `https://movie-master-server-theta.vercel.app/movies/${movie._id}`,
+            {
+              headers: authHeaders(),
+            }
+          )
           .then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -116,7 +118,10 @@ const MovieDetails = () => {
             console.error("Delete error:", err);
             Swal.fire({
               title: "Error!",
-              text: err?.response?.data?.message || err?.message || "Failed to delete movie.",
+              text:
+                err?.response?.data?.message ||
+                err?.message ||
+                "Failed to delete movie.",
               icon: "error",
               confirmButtonColor: "#e3342f",
             });
@@ -124,7 +129,6 @@ const MovieDetails = () => {
       }
     });
   };
-
 
   const handleAddToWatchList = () => {
     if (!user?.email) {
@@ -136,12 +140,12 @@ const MovieDetails = () => {
       }).then(() => navigate("/login", { state: { from: `/movie/${id}` } }));
       return;
     }
-    if (isProcessing || isAdded) return; 
+    if (isProcessing || isAdded) return;
 
     setIsProcessing(true);
 
     const payload = {
-        movieId: String(movie._id),
+      movieId: String(movie._id),
       title: movie.title,
       posterUrl: movie.posterUrl || movie.poster || "",
       addedBy: user.email,
@@ -151,42 +155,49 @@ const MovieDetails = () => {
     };
 
     axios
-      .post("http://localhost:3000/watch-list", payload, {
-        headers: authHeaders(),
-      })
+      .post(
+        "https://movie-master-server-theta.vercel.app/watch-list",
+        payload,
+        {
+          headers: authHeaders(),
+        }
+      )
       .then((res) => {
         toast.success("Movie added to watchlist!");
         setIsAdded(true);
-    
+
         const insertedId =
           res?.data?.result?.insertedId ||
           (res?.data?.result && res.data.result.insertedId) ||
           res?.data?.result?.ops?.[0]?._id ||
           null;
-        
+
         setWatchItemId(insertedId || movie._id);
       })
       .catch((err) => {
         console.error("Add to watchlist error:", err);
         const status = err?.response?.status;
         if (status === 409) {
-          toast.info(err?.response?.data?.message || "Already in your watchlist.");
-       
+          toast.info(
+            err?.response?.data?.message || "Already in your watchlist."
+          );
+
           setIsAdded(true);
-     
+
           const existingId = err?.response?.data?.existingId || movie._id;
           setWatchItemId(existingId);
         } else if (status === 401) {
           toast.error("Please log in to add movies to your watchlist.");
           navigate("/login", { state: { from: `/movie/${id}` } });
         } else {
-          toast.error(err?.response?.data?.message || "Failed to add to watchlist.");
+          toast.error(
+            err?.response?.data?.message || "Failed to add to watchlist."
+          );
         }
       })
       .finally(() => setIsProcessing(false));
   };
 
-  
   const handleRemoveFromWatchList = () => {
     if (!user?.email) {
       toast.error("Please login to modify your watchlist.");
@@ -210,10 +221,13 @@ const MovieDetails = () => {
       const deleteId = watchItemId || movie._id;
 
       axios
-        .delete(`http://localhost:3000/watch-list/${deleteId}`, {
-          headers: authHeaders(),
-          params: { email: user.email }, 
-        })
+        .delete(
+          `https://movie-master-server-theta.vercel.app/watch-list/${deleteId}`,
+          {
+            headers: authHeaders(),
+            params: { email: user.email },
+          }
+        )
         .then(() => {
           toast.success("Removed from watchlist.");
           setIsAdded(false);
@@ -229,7 +243,9 @@ const MovieDetails = () => {
           } else if (status === 401) {
             toast.error("Unauthorized. Please login and try again.");
           } else {
-            toast.error(err?.response?.data?.message || "Failed to remove. Try again.");
+            toast.error(
+              err?.response?.data?.message || "Failed to remove. Try again."
+            );
           }
         })
         .finally(() => setIsProcessing(false));
@@ -240,12 +256,18 @@ const MovieDetails = () => {
     <div className="max-w-11/12 mx-auto mt-10 p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl border border-red-500">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div>
-          <img src={movie.posterUrl} alt={movie.title} className="w-full rounded-xl border-4 shadow-md" />
+          <img
+            src={movie.posterUrl}
+            alt={movie.title}
+            className="w-full rounded-xl border-4 shadow-md"
+          />
         </div>
 
         <div>
           <h1 className="text-3xl font-bold text-red-600">{movie.title}</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-3">{movie.genre} • {movie.releaseYear}</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-3">
+            {movie.genre} • {movie.releaseYear}
+          </p>
 
           <div className="flex items-center gap-4 mb-3">
             <div className="flex items-center text-gray-700 dark:text-gray-300">
@@ -256,21 +278,39 @@ const MovieDetails = () => {
             </div>
           </div>
 
-          <p className="text-gray-700 dark:text-gray-300 mb-1"><strong>Director:</strong> {movie.director}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-1"><strong>Cast:</strong> {movie.cast}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-1"><strong>Language:</strong> {movie.language}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-1"><strong>Country:</strong> {movie.country}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-3"><strong>Plot Summary:</strong> {movie.plotSummary}</p>
-          <p className="text-gray-700 dark:text-gray-300"><strong>Added By:</strong> {movie.addedBy}</p>
+          <p className="text-gray-700 dark:text-gray-300 mb-1">
+            <strong>Director:</strong> {movie.director}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-1">
+            <strong>Cast:</strong> {movie.cast}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-1">
+            <strong>Language:</strong> {movie.language}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-1">
+            <strong>Country:</strong> {movie.country}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-3">
+            <strong>Plot Summary:</strong> {movie.plotSummary}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300">
+            <strong>Added By:</strong> {movie.addedBy}
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             {isOwner && (
               <>
-                <Link to={`/edit-movie/${movie._id}`} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all">
+                <Link
+                  to={`/edit-movie/${movie._id}`}
+                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all"
+                >
                   <FaEdit /> Edit
                 </Link>
 
-                <button onClick={handleDeleteMovie} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all">
+                <button
+                  onClick={handleDeleteMovie}
+                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all"
+                >
                   <FaTrashAlt /> Delete
                 </button>
               </>
@@ -281,7 +321,9 @@ const MovieDetails = () => {
               <button
                 onClick={handleRemoveFromWatchList}
                 disabled={isProcessing}
-                className={`flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg shadow-md transition-all ${isProcessing ? "opacity-70 cursor-not-allowed" : ""}`}
+                className={`flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg shadow-md transition-all ${
+                  isProcessing ? "opacity-70 cursor-not-allowed" : ""
+                }`}
               >
                 <FaHeart className="text-red-400" />
                 {isProcessing ? "Processing..." : "Remove from Watchlist"}
@@ -290,7 +332,9 @@ const MovieDetails = () => {
               <button
                 onClick={handleAddToWatchList}
                 disabled={isProcessing}
-                className={`flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all ${isProcessing ? "opacity-70 cursor-not-allowed" : ""}`}
+                className={`flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all ${
+                  isProcessing ? "opacity-70 cursor-not-allowed" : ""
+                }`}
               >
                 <FaHeart />
                 {isProcessing ? "Processing..." : "Add to Watchlist"}

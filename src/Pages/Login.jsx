@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate, useLocation } from "react-router"; 
+import { Link, useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
@@ -30,8 +30,9 @@ const Login = () => {
       })
       .catch((err) => {
         console.error("Login error:", err);
-        const msg = (err, "No account found. Please check your email or password./");
-        toast.error(msg)
+        const msg =
+          (err, "No account found. Please check your email or password./");
+        toast.error(msg);
         setError(msg);
       });
   };
@@ -44,10 +45,12 @@ const Login = () => {
           email: result.user.email,
           image: result.user.photoURL,
         };
-        axios.post("http://localhost:3000/users", newUser).then(() => {
-          toast.success("Login successful!");
-          navigate(from, { replace: true });
-        });
+        axios
+          .post("https://movie-master-server-theta.vercel.app/users", newUser)
+          .then(() => {
+            toast.success("Login successful!");
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => {
         console.error("Google sign-in error:", err);

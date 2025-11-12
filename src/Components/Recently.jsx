@@ -26,22 +26,19 @@ const cardItem = {
 const Recently = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
-  
 
   useEffect(() => {
-   axios
-  .get("http://localhost:3000/hero")
-  .then((res) => {
-    const data = Array.isArray(res.data)
-      ? res.data
-      : res.data.result || res.data.movies || res.data.data || res.data;
-    const arr = Array.isArray(data) ? data : [];
-    setMovies(arr); 
-  })
-  .catch((e) => setError(e.message));
-    
+    axios
+      .get("https://movie-master-server-theta.vercel.app/hero")
+      .then((res) => {
+        const data = Array.isArray(res.data)
+          ? res.data
+          : res.data.result || res.data.movies || res.data.data || res.data;
+        const arr = Array.isArray(data) ? data : [];
+        setMovies(arr);
+      })
+      .catch((e) => setError(e.message));
   }, []);
-
 
   if (error)
     return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
@@ -77,10 +74,8 @@ const Recently = () => {
                 }}
               />
 
-             
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-    
               <div className="p-4">
                 <h3 className="text-lg font-semibold line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
                   {movie.title}

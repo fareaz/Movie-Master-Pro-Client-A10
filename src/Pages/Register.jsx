@@ -24,20 +24,18 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-      if (!emailPattern.test(email)) {
-        setError("Please enter a valid email address.");
-        toast.error("Please enter a valid email address.");
-        return;
-      }
-    
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-        if (!passwordPattern.test(password)) {
-          setError(
-            "Password must include uppercase and lowercase(min 6 chars)."
-          );
-          return;
-        }
+
+    if (!emailPattern.test(email)) {
+      setError("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setError("Password must include uppercase and lowercase(min 6 chars).");
+      return;
+    }
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -48,7 +46,10 @@ const Register = () => {
               email: user.email,
               photoURL: photoURL || user.photoURL || "",
             };
-            return axios.post("http://localhost:3000/users", newUser);
+            return axios.post(
+              "https://movie-master-server-theta.vercel.app/users",
+              newUser
+            );
           })
           .then(() => {
             toast.success("User created successfully!", { id: "create-user" });
@@ -76,10 +77,12 @@ const Register = () => {
           email: result.user.email,
           image: result.user.photoURL,
         };
-        axios.post("http://localhost:3000/users", newUser).then(() => {
-          toast.success("Signin successful");
-          navigate(location?.state || "/");
-        });
+        axios
+          .post("https://movie-master-server-theta.vercel.app/users", newUser)
+          .then(() => {
+            toast.success("Signin successful");
+            navigate(location?.state || "/");
+          });
       })
       .catch((error) => {
         console.log(error);

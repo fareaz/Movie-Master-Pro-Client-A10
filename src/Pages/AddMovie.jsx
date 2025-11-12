@@ -1,15 +1,25 @@
-
-import { FaFilm, FaUserAlt, FaStar, FaGlobe, FaClock, FaAlignLeft, FaLanguage, FaFlag, FaImage, FaCalendarAlt, FaEnvelope } from "react-icons/fa";
-import { AuthContext } from '../Context/AuthContext';
-import { toast } from 'react-toastify';
-import {  useContext } from "react";
+import {
+  FaFilm,
+  FaUserAlt,
+  FaStar,
+  FaGlobe,
+  FaClock,
+  FaAlignLeft,
+  FaLanguage,
+  FaFlag,
+  FaImage,
+  FaCalendarAlt,
+  FaEnvelope,
+} from "react-icons/fa";
+import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
+import { useContext } from "react";
 import axios from "axios";
 const AddMovie = () => {
-    const { user } = useContext(AuthContext)
-
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = {
       title: e.target.title.value,
       genre: e.target.genre.value,
@@ -24,13 +34,13 @@ const AddMovie = () => {
       country: e.target.country.value,
       addedBy: user.email,
       created_at: new Date(),
-    }
-     axios
-      .post("http://localhost:3000/movies", formData , {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      }
-    })
+    };
+    axios
+      .post("https://movie-master-server-theta.vercel.app/movies", formData, {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      })
       .then((data) => {
         console.log(data.data);
         toast.success("Successfully added!");
@@ -39,15 +49,17 @@ const AddMovie = () => {
       .catch((error) => {
         console.error(error);
       });
-  }
-    return (
-         <div className="max-w-11/12 mx-auto  p-8 bg-transparent backdrop-blur-md glass-card rounded-2xl shadow-xl">
+  };
+  return (
+    <div className="max-w-11/12 mx-auto  p-8 bg-transparent backdrop-blur-md glass-card rounded-2xl shadow-xl">
       <h2 className="text-3xl font-bold mb-6 text-center">
-         Add New <span className='text-red-500'>Movie</span>
+        Add New <span className="text-red-500">Movie</span>
       </h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         <div className="flex items-center gap-3">
           <FaFilm className="text-red-500 text-xl" />
           <input
@@ -59,34 +71,32 @@ const AddMovie = () => {
           />
         </div>
 
-     
-            <div className="flex items-center gap-3">
-         <FaGlobe className="text-red-500 text-xl" />
-       
-         <select
-         name="genre"
-         required
-         defaultValue= ""
-         className="select text-gray-400 rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
-       >
-         <option value="" disabled>
-           Select Genre
-         </option>
-         <option value="Action">Action</option>
-         <option value="Adventure">Adventure</option>
-         <option value="Comedy">Comedy</option>
-         <option value="Drama">Drama</option>
-         <option value="Fantasy">Fantasy</option>
-         <option value="Horror">Horror</option>
-         <option value="Romance">Romance</option>
-         <option value="Sci-Fi">Sci-Fi</option>
-         <option value="Thriller">Thriller</option>
-         <option value="Animation">Animation</option>
-         <option value="Biography">Biography</option>
-         <option value="Musical">Musical</option>
-       </select>
-       
-       </div>
+        <div className="flex items-center gap-3">
+          <FaGlobe className="text-red-500 text-xl" />
+
+          <select
+            name="genre"
+            required
+            defaultValue=""
+            className="select text-gray-400 rounded-lg border border-red-400 px-3 py-2 outline-none focus:ring-2 focus:ring-red-500 flex-1"
+          >
+            <option value="" disabled>
+              Select Genre
+            </option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Animation">Animation</option>
+            <option value="Biography">Biography</option>
+            <option value="Musical">Musical</option>
+          </select>
+        </div>
 
         {/* Release Year */}
         <div className="flex items-center gap-3">
@@ -100,7 +110,6 @@ const AddMovie = () => {
           />
         </div>
 
-      
         <div className="flex items-center gap-3">
           <FaUserAlt className="text-red-500 text-xl" />
           <input
@@ -112,7 +121,6 @@ const AddMovie = () => {
           />
         </div>
 
-      
         <div className="flex items-center gap-3">
           <FaUserAlt className="text-red-500 text-xl" />
           <input
@@ -124,7 +132,6 @@ const AddMovie = () => {
           />
         </div>
 
-    
         <div className="flex items-center gap-3">
           <FaStar className="text-red-500 text-xl" />
           <input
@@ -137,7 +144,6 @@ const AddMovie = () => {
           />
         </div>
 
-    
         <div className="flex items-center gap-3">
           <FaClock className="text-red-500 text-xl" />
           <input
@@ -149,7 +155,6 @@ const AddMovie = () => {
           />
         </div>
 
-       
         <div className="flex items-center gap-3">
           <FaImage className="text-red-500 text-xl" />
           <input
@@ -161,7 +166,6 @@ const AddMovie = () => {
           />
         </div>
 
-    
         <div className="flex items-center gap-3">
           <FaLanguage className="text-red-500 text-xl" />
           <input
@@ -173,7 +177,6 @@ const AddMovie = () => {
           />
         </div>
 
-   
         <div className="flex items-center gap-3">
           <FaFlag className="text-red-500 text-xl" />
           <input
@@ -185,7 +188,6 @@ const AddMovie = () => {
           />
         </div>
 
-      
         <div className="flex items-center gap-3">
           <FaEnvelope className="text-red-500 text-xl" />
           <input
@@ -207,7 +209,6 @@ const AddMovie = () => {
           />
         </div>
 
-        
         <div className="md:col-span-2">
           <button
             type="submit"
@@ -218,7 +219,7 @@ const AddMovie = () => {
         </div>
       </form>
     </div>
-    );
+  );
 };
 
 export default AddMovie;
