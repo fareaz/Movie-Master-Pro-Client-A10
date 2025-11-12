@@ -1,7 +1,14 @@
-🎬 **MovieMaster Pro**
-Client-side GitHub Repository:https://github.com/fareaz/Movie-Master-Pro-Client-A10.git
-Server-side GitHub Repository:https://github.com/fareaz/Movie-Master-Pro-Server-A10.git
-Live Website Link:https://merry-kitsune-0ce923.netlify.app/
+## 🔗 Project Links
+
+- 🎬 **MovieMaster Pro Client-side GitHub Repository:**  
+  [https://github.com/fareaz/Movie-Master-Pro-Client-A10.git](https://github.com/fareaz/Movie-Master-Pro-Client-A10.git)
+
+- 🧠 **Server-side GitHub Repository:**  
+  [https://github.com/fareaz/Movie-Master-Pro-Server-A10.git](https://github.com/fareaz/Movie-Master-Pro-Server-A10.git)
+
+- 🌐 **Live Website:**  
+  [https://merry-kitsune-0ce923.netlify.app/](https://merry-kitsune-0ce923.netlify.app/)
+
 
 ---
 
