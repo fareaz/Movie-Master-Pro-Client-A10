@@ -52,7 +52,7 @@ const Recently = () => {
 
   return (
     <section className="px-4 py-8 ">
-      <div className=" mx-auto">
+      <div className="mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
           Recently Added<span className="text-red-600"> Movies</span>
         </h2>

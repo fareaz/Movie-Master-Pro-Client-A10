@@ -26,8 +26,8 @@ const Genre = () => {
   };
 
   return (
-    <section className="px-5 py-16">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="px-10 py-16">
+      <div className=" mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
