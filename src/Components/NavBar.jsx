@@ -151,87 +151,108 @@ const NavBar = () => {
       </div>
 
       <div className="navbar-end gap-3">
-        {user ? (
-          <div className="dropdown dropdown-end z-50">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-9 border-2 border-gray-300 rounded-full">
-                <img
-                  alt="User Avatar"
-                  referrerPolicy="no-referrer"
-                  src={
-                    user.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  }
-                />
-              </div>
-            </div>
-
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 max-w-52 p-2 shadow z-50"
-            >
-              <div className="pb-3 border-b border-b-gray-200">
-                <li className="text-sm font-bold">{user.displayName}</li>
-                <li className="text-xs text-gray-500">{user.email}</li>
-              </div>
-
-              <li>
-                <Link to="/my-movies" className="hover:text-red-600">
-                  My Movies
-                </Link>
-              </li>
-              <li>
-                <Link to="/watch-list" className="hover:text-red-600">
-                  Watch List
-                </Link>
-              </li>
-              <li>
-                <a className="flex items-center gap-2">Settings</a>
-              </li>
-
-             
-
-              <li>
-                <button
-                  onClick={handleLogout} 
-                  className="btn btn-xs mt-1 text-left bg-gradient-to-r from-red-600 to-red-500 text-white w-full"
-                >
-                  <IoLogOut className="mr-1" /> Logout
-                </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <>
-            <Link
-              to="/login"
-              className="btn btn-sm rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white flex items-center gap-1"
-            >
-              <IoLogIn /> Login
-            </Link>
-
-            <Link
-              to="/register"
-              className="btn btn-sm rounded-full border border-red-500 text-red-600 hover:bg-red-500 hover:text-white transition"
-            >
-              Register
-            </Link>
-            <li className="hidden sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-  <div className="flex items-center gap-2 text-sm font-medium">
-    <span className="text-gray-600 dark:text-gray-400">Light</span>
-    <input
-      onChange={(e) => handleTheme(e.target.checked)}
-      type="checkbox"
-      checked={theme === "dark"}
-      className="toggle toggle-sm bg-gray-300 border-gray-400"
-    />
-    <span className="text-gray-600 dark:text-gray-400">Dark</span>
-  </div>
-</li>
-
-          </>
-        )}
+  {user ? (
+    <>
+      {/* Theme Toggle (visible only when logged in) */}
+      <div className="hidden sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+        <div className="flex items-center gap-2 text-sm font-medium">
+          <span className="text-gray-600 dark:text-gray-400">Light</span>
+          <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            type="checkbox"
+            checked={theme === "dark"}
+            className="toggle toggle-sm bg-gray-300 border-gray-400"
+          />
+          <span className="text-gray-600 dark:text-gray-400">Dark</span>
+        </div>
       </div>
+
+      {/* User Dropdown */}
+      <div className="dropdown dropdown-end z-50">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-9 border-2 border-gray-300 rounded-full">
+            <img
+              alt="User Avatar"
+              referrerPolicy="no-referrer"
+              src={
+                user.photoURL ||
+                "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              }
+            />
+          </div>
+        </div>
+
+        <ul
+          tabIndex="-1"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 max-w-52 p-2 shadow z-50"
+        >
+          <div className="pb-3 border-b border-b-gray-200">
+            <li className="text-sm font-bold">{user.displayName}</li>
+            <li className="text-xs text-gray-500">{user.email}</li>
+          </div>
+
+          <li>
+            <Link to="/my-movies" className="hover:text-red-600">
+              My Movies
+            </Link>
+          </li>
+          <li>
+            <Link to="/watch-list" className="hover:text-red-600">
+              Watch List
+            </Link>
+          </li>
+          <li>
+            <a className="flex items-center gap-2">Settings</a>
+          </li>
+          <li>
+            <button
+              onClick={handleLogout}
+              className="btn btn-xs mt-1 text-left bg-gradient-to-r from-red-600 to-red-500 text-white w-full"
+            >
+              <IoLogOut className="mr-1" /> Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </>
+  ) : (
+    <>
+      {/* Login & Register Buttons */}
+      <Link
+        to="/login"
+        className="btn btn-sm rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white flex items-center gap-1"
+      >
+        <IoLogIn /> Login
+      </Link>
+
+      <Link
+        to="/register"
+        className="btn btn-sm rounded-full border border-red-500 text-red-600 hover:bg-red-500 hover:text-white transition"
+      >
+        Register
+      </Link>
+
+      {/* Theme Toggle (visible when logged out) */}
+      <div className="hidden sm:flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+        <div className="flex items-center gap-2 text-sm font-medium">
+          <span className="text-gray-600 dark:text-gray-400">Light</span>
+          <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            type="checkbox"
+            checked={theme === "dark"}
+            className="toggle toggle-sm bg-gray-300 border-gray-400"
+          />
+          <span className="text-gray-600 dark:text-gray-400">Dark</span>
+        </div>
+      </div>
+    </>
+  )}
+</div>
+
     </div>
   );
 };
