@@ -44,6 +44,7 @@ const Login = () => {
           name: result.user.displayName,
           email: result.user.email,
           image: result.user.photoURL,
+          role:"user"
         };
         axios
           .post("https://movie-master-server-theta.vercel.app/users", newUser)

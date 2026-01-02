@@ -13,6 +13,14 @@ import UpdataPage from "../Pages/UpdataPage";
 import MyMovies from "../Pages/MyMovies";
 import WatchList from "../Pages/Watchlist";
 import GenreMovies from "../Pages/GenreMovies";
+import About from "../Components/About";
+import Contact from "../Pages/Contact";
+import DashboardLayout from "../LayOuts/DashboardLayout";
+import DashboardHome from "../Pages/DashboardHome/DashboardHome";
+import Profile from "../Pages/Profile";
+import UsersManagement from "../Pages/UsersManagement";
+import ManageMovies from "../Pages/ManageMovies";
+import AdminRoute from "../Private/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,41 +38,31 @@ const router = createBrowserRouter([
         element: <AllMovies></AllMovies>,
       },
       {
-        path: "/add-movie",
-        element: (
-          <PrivateRoute>
-            <AddMovie></AddMovie>
-          </PrivateRoute>
-        ),
+        path: "/about",
+        element: <About></About>,
       },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+     
+
       {
         path: "/genre/:name",
         element: <GenreMovies></GenreMovies>,
       },
       {
+        path: "profile",
+        element: <Profile></Profile>,
+      },
+      {
         path: "movie/:id",
         element: (
-          <PrivateRoute>
             <MovieDetails></MovieDetails>
-          </PrivateRoute>
+        
         ),
       },
-      {
-        path: "/my-movies",
-        element: (
-          <PrivateRoute>
-            <MyMovies></MyMovies>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/watch-list",
-        element: (
-          <PrivateRoute>
-            <WatchList></WatchList>
-          </PrivateRoute>
-        ),
-      },
+      
       {
         path: "/edit-movie/:id",
         element: (
@@ -87,6 +85,41 @@ const router = createBrowserRouter([
       },
     ],
   },
+   {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+  children:[
+       {
+        index: true,
+        Component: DashboardHome,
+      },
+      {
+        path: "my-movies",
+        element: <MyMovies></MyMovies>,
+      },
+      {
+        path: "add-movie",
+        element: <AddMovie></AddMovie>,
+      },
+      {
+        path: "watch-list",
+        element: <WatchList></WatchList>,
+      },
+      {
+        path: "all-movies",
+        element:<AdminRoute><ManageMovies></ManageMovies></AdminRoute> ,
+      },
+      {
+        path: "users-management",
+        element:<AdminRoute> <UsersManagement></UsersManagement></AdminRoute>,
+      },
+  
+  ]},
+
 
   {
     path: "*",

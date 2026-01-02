@@ -43,7 +43,8 @@ const UpdataPage = () => {
 
     axios
       .put(
-        `https://movie-master-server-theta.vercel.app/movie/${movie._id}`,
+        // `https://movie-master-server-theta.vercel.app/movie/${movie._id}`,
+        `https://movie/${movie._id}`,
         formData,
         {
           headers: {

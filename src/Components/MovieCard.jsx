@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Link } from "react-router"; 
 import { FaStar } from "react-icons/fa";
 import { AuthContext } from "../Context/AuthContext";
 
 const MovieCard = ({ movie }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const {
     _id,
@@ -14,8 +14,8 @@ const MovieCard = ({ movie }) => {
     genre = "Unknown",
     releaseYear = "_",
   } = movie || {};
-  const detailsTarget = user ? `/movie/${_id}` : "/login";
-  const detailsState = user ? undefined : { from: `/movie/${_id}` };
+  // const detailsTarget = user ? `/movie/${_id}` : "/login";
+  // const detailsState = user ? undefined : { from: `/movie/${_id}` };
 
   return (
     <div className="group relative rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow-sm hover:shadow-xl transition overflow-hidden">
@@ -57,8 +57,9 @@ const MovieCard = ({ movie }) => {
         <div className="pt-1">
           
           <Link
-            to={detailsTarget}
-            state={detailsState}
+          to={`/movie/${_id}`}
+            // to={detailsTarget}
+            // state={detailsState}
             className="inline-flex items-center justify-center w-full rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2.5 font-medium hover:from-red-700 hover:to-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition"
             aria-label={`View details for ${title}`}
           >

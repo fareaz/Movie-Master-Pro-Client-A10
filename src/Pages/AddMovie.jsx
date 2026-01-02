@@ -36,7 +36,8 @@ const AddMovie = () => {
       created_at: new Date(),
     };
     axios
-      .post("https://movie-master-server-theta.vercel.app/movies", formData, {
+      // .post("https://movie-master-server-theta.vercel.app/movies", formData, {
+      .post("http://localhost:3000/movies", formData, {
         headers: {
           authorization: `Bearer ${user.accessToken}`,
         },

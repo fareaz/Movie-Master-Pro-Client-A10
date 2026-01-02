@@ -45,6 +45,7 @@ const Register = () => {
               name: displayName || user.displayName || "",
               email: user.email,
               photoURL: photoURL || user.photoURL || "",
+              role:"user"
             };
             return axios.post(
               "https://movie-master-server-theta.vercel.app/users",
@@ -76,6 +77,7 @@ const Register = () => {
           name: result.user.displayName,
           email: result.user.email,
           image: result.user.photoURL,
+          role:"user"
         };
         axios
           .post("https://movie-master-server-theta.vercel.app/users", newUser)
