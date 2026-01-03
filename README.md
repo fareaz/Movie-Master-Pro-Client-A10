@@ -11,6 +11,19 @@
 
 
 ---
+🔐 Demo Credentials
+
+Admin Account:
+
+Email: admin@gmail.com
+
+Password: Admin@12
+
+User Account:
+
+Email: user@gmail.com
+
+Password: User@12
 
  🚀 **About the Project**
 
