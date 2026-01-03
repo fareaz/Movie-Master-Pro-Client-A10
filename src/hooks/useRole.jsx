@@ -18,7 +18,7 @@ const useRole = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/users/${user.email}/role`,
+        `https://movie-master-server-theta.vercel.app/users/${user.email}/role`,
       );
 
       return res.data.role; // "admin" | "user"

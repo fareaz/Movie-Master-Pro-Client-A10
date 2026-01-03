@@ -19,7 +19,7 @@ const Profile = () => {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:3000/users/profile/${user.email}`)
+      .get(`https://movie-master-server-theta.vercel.app/users/profile/${user.email}`)
       .then((res) => {
         setProfile(res.data);
         setName(res.data.name || "");
@@ -52,7 +52,7 @@ const Profile = () => {
   try {
     // 2️⃣ MongoDB update
     await axios.patch(
-      `http://localhost:3000/users/profile/${user.email}`,
+      `https://movie-master-server-theta.vercel.app/users/profile/${user.email}`,
       { name, photoURL }
     );
 

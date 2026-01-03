@@ -23,7 +23,7 @@ const UserDashboardHome = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/my-movies?email=${user.email}`,
+        `https://movie-master-server-theta.vercel.app/my-movies?email=${user.email}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -38,7 +38,7 @@ const UserDashboardHome = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/my-watch-list?email=${user.email}`,
+        `https://movie-master-server-theta.vercel.app/my-watch-list?email=${user.email}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }

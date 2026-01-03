@@ -19,7 +19,7 @@ const ManageMovies = () => {
   useEffect(() => {
     if (role === "admin") {
       axios
-        .get("http://localhost:3000/movies")
+        .get("https://movie-master-server-theta.vercel.app/movies")
         .then((res) => {
           setMovies(res.data);
           setLoading(false);
@@ -49,7 +49,7 @@ const ManageMovies = () => {
 
     if (!confirm.isConfirmed) return;
 
-    await axios.delete(`http://localhost:3000/movies/${id}`);
+    await axios.delete(`https://movie-master-server-theta.vercel.app/movies/${id}`);
     setMovies((prev) => prev.filter((m) => m._id !== id));
 
     Swal.fire("Deleted", "Movie removed", "success");
@@ -60,7 +60,7 @@ const ManageMovies = () => {
     e.preventDefault();
     const { _id, ...payload } = editMovie;
 
-    await axios.patch(`http://localhost:3000/admin/movies/${_id}`, {
+    await axios.patch(`https://movie-master-server-theta.vercel.app/admin/movies/${_id}`, {
       email: user.email,
       ...payload,
     });

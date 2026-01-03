@@ -22,7 +22,7 @@ const UsersManagement = () => {
     }
 
     axios
-      .get(`http://localhost:3000/users?email=${user.email}`)
+      .get(`https://movie-master-server-theta.vercel.app/users?email=${user.email}`)
       .then((res) => {
         setUsers(res.data);
         setLoading(false);
@@ -42,7 +42,7 @@ const UsersManagement = () => {
 
   // 🔹 Role change
   const handleRoleChange = async (id, newRole) => {
-    await axios.patch(`http://localhost:3000/users/role/${id}`, {
+    await axios.patch(`https://movie-master-server-theta.vercel.app/users/role/${id}`, {
       role: newRole,
       adminEmail: user.email,
     });
@@ -65,7 +65,7 @@ const UsersManagement = () => {
     if (!confirm.isConfirmed) return;
 
     await axios.delete(
-      `http://localhost:3000/users/${id}?email=${user.email}`
+      `https://movie-master-server-theta.vercel.app/users/${id}?email=${user.email}`
     );
 
     setUsers((prev) => prev.filter((u) => u._id !== id));
